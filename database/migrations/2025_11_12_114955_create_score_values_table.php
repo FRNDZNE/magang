@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('score_values', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('score_id')->constrained('scores')->onDelete('cascade');
+            $table->foreignId('intern_id')->constrained('interns')->onDelete('cascade');
+            $table->integer('value');
             $table->timestamps();
         });
     }

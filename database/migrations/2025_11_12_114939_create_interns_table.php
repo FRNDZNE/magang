@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('interns', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('mentor_id')->nullable()->constrained()->onDelete('cascade');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->enum('status', ['c', 'p', 'a', 'd'])->default('c');
             $table->timestamps();
         });
     }
