@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('logbook_images', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('logbook_id')->constrained('logbooks')->onDelete('cascade');
+            $table->string('image_path');
             $table->timestamps();
         });
     }

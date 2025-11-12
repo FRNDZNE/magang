@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('logbooks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('intern_id')->constrained('interns')->onDelete('cascade');    
+            $table->date('date');
+            $table->text('activity');
+            $table->text('output');
+            $table->text('feedback')->nullable();
             $table->timestamps();
         });
     }

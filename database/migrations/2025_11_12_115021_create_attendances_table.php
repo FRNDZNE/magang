@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('intern_id')->constrained('interns')->onDelete('cascade');
+            $table->date('date');
+            $table->enum('status', ['h','s','i','a','l'])->default('h');
+            $table->boolean('validated')->default(false);
+            $table->string('notes')->nullable();
             $table->timestamps();
         });
     }
