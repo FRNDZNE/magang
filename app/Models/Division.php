@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Division extends Model
 {
-    //
+    protected $guarded = [];
+
+    public function mentor()
+    {
+        return $this->hasMany(Mentor::class);
+    }
 }
