@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('end_date');
             $table->enum('status', ['c', 'p', 'a', 'd'])->default('c');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
