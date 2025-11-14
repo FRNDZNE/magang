@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('title', 'Manajemen Divisi')
 @section('role', 'Nanti ada role disini')
-@section('page-active', 'active')
+@section('breadcrumb')
+    <li class="breadcrumb-item active" aria-current="page">Detail Divisi</li>
+@endsection
 @section('content')
 <div class="card">
     <div class="card-header">
