@@ -43,6 +43,7 @@
     <!-- apexcharts -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css"
         integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous" />
+    @stack('styles')
 </head>
 
 <body class="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary">
@@ -70,6 +71,7 @@
                                 <li class="breadcrumb-item"><a href="#">@yield('role')</a></li>
                                 <li class="breadcrumb-item @yield('page-active')" aria-current="page">@yield('title')
                                 </li>
+                                {{-- breadcrumb digunakan kalau page didalam page --}}
                                 @yield('breadcrumb')
                             </ol>
                         </div>
@@ -142,6 +144,26 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js"
         integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8=" crossorigin="anonymous"></script>
     <!--end::Script-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (Session::has('success'))
+        <script>
+            Swal.fire({
+                title: "Berhasil",
+                text: "{{ Session::get('success') }}",
+                icon: "success"
+            });
+        </script>
+    @endif
+    @if (Session::has('error'))
+        <script>
+            Swal.fire({
+                title: "Berhasil",
+                text: "{{ Session::get('error') }}",
+                icon: "error"
+            });
+        </script>
+    @endif
+    @stack('scripts')
 </body>
 <!--end::Body-->
 

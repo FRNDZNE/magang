@@ -77,13 +77,15 @@
                 </li>
                 <li class="nav-header">Role & Permission</li>
                 <li class="nav-item">
-                    <a href="./docs/introduction.html" class="nav-link">
+                    <a href="{{ route('roles.index') }}"
+                        class="nav-link {{ Route::is('roles.index') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-journal-text"></i>
                         <p>Role</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="./docs/introduction.html" class="nav-link">
+                    <a href="{{ route('permissions.index') }}"
+                        class="nav-link {{ Route::is('permissions.index') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-calendar-check"></i>
                         <p>Permission</p>
                     </a>

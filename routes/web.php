@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\DivisionController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\MentorController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\PermissionController;
+
 
 
 Route::get('/', function () {
@@ -30,11 +33,11 @@ Route::resource('divisions', DivisionController::class);
 Route::resource('mentors', MentorController::class);
 
 Route::resource('roles',RoleController::class)->only([
-    'index', 'store','update'
+    'index', 'store','update','destroy'
 ]);
 
 Route::resource('permissions',PermissionController::class)->only([
-    'index', 'store','update'
+    'index', 'store','update','destroy'
 ]);
 
 require __DIR__.'/auth.php';
