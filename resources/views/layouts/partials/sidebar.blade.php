@@ -57,7 +57,7 @@
                 </li>
                 <li class="nav-header">Penilaian</li>
                 <li class="nav-item">
-                    <a href="./docs/introduction.html" class="nav-link">
+                    <a href="{{ route('scores.index') }}" class="nav-link">
                         <i class="nav-icon bi bi-clipboard-check"></i>
                         <p>Penilaian</p>
                     </a>

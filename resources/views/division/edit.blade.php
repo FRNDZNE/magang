@@ -1,11 +1,13 @@
 @extends('layouts.app')
 @section('title', 'Manajemen Divisi')
 @section('role', 'Nanti ada role disini')
-@section('page-active', 'active')
+@section('breadcrumb')
+    <li class="breadcrumb-item active" aria-current="page">Edit Divisi</li>
+@endsection
 @section('content')
 <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Form Update Divisi</h3>
+            <h3 class="card-title">Form Edit Divisi</h3>
         </div>
         <form action="{{ route('divisions.update', $division->id) }}" method="post">
             @csrf

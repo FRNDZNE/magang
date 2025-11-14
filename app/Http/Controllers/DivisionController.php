@@ -32,7 +32,8 @@ class DivisionController extends Controller
         try {
             $data = $request->validated();
             Division::create($data);
-            return redirect()->route('divisions.index')->with('success','Berhasil Menambah Divisi !');
+            return redirect()->route('divisions.index')
+            ->with('success','Berhasil Menambah Divisi !');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());
         }

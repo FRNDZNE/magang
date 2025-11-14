@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Score;
-use Illuminate\Http\Request;
+use App\Http\Requests\ScoreRequest;
 
 class ScoreController extends Controller
 {
@@ -12,9 +12,8 @@ class ScoreController extends Controller
      */
     public function index()
     {
-        $data = Score::orderby('created_at', 'desc')->paginate(5);
-        dd("Controller ok");
-        return view('division.index', compact('data'));
+        $score = Score::orderby('created_at', 'desc')->paginate(5);
+        return view('score.index', compact('score'));
     }
 
     /**
@@ -28,11 +27,16 @@ class ScoreController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ScoreRequest $request)
     {
-        Score::create($request->validated());
+        try{
+        $data = $request->validated();
+        Score::create($data);
         return redirect()->route('scores.index')
-        ->with('success', 'Score created successfully.');
+        ->with('success', 'Berhasil Menambah Nilai !');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -43,7 +47,7 @@ class ScoreController extends Controller
         return view('score.show', compact('score'));
     }
 
-    /**
+    /*
      * Show the form for editing the specified resource.
      */
     public function edit(Score $score)
@@ -54,19 +58,28 @@ class ScoreController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Score $score)
+    public function update(ScoreRequest $request, $id)
     {
-        $score->update($request->validated());
-        return redirect()->route('scores.index')
-        ->with('success', 'Score updated successfully.');
+        try{
+        $data = $request->validated();
+        $score= Score::find($id);
+        $score->update($data);
+        return redirect()->route('scores.index')->with('success','Berhasil Mengubah Nilai !');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Score $score)
+    public function destroy($id)
     {
-        $score->delete();
-        return back()->with('success','Score deleted successfully.');
+        try{
+            Score::find($id)->delete();
+            return redirect()->route('scores.index')->with('success','Berhasil Menghapus Nilai !');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 }

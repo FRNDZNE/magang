@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DivisionRequest extends FormRequest
+class ScoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,6 +22,7 @@ class DivisionRequest extends FormRequest
     public function rules(): array
     {
         return [
+
             'name' => 'required',
             'description' => ''
         ];
@@ -30,7 +31,7 @@ class DivisionRequest extends FormRequest
     public function attributes() : array
     {
         return [
-            'name' => 'Divisi',
+            'name' => 'Score',
         ];
     }
 
@@ -41,5 +42,4 @@ class DivisionRequest extends FormRequest
             'required' => ':attribute Tidak Boleh Kosong',
         ];
     }
-
 }
