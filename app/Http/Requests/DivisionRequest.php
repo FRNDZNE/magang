@@ -19,20 +19,27 @@ class DivisionRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+   public function rules(): array
     {
         return [
-            'name' => 'required|string|max:20',
-            'description' => 'nullable|string',
+
+            'name' => 'required',
+            'description' => ''
         ];
     }
 
-    public function messages(): array
+    public function attributes() : array
     {
         return [
-            'name.required' => 'The division name is required.',
-            'name.string' => 'The division name must be a string.',
-            'name.max' => 'The division name may not be greater than 20 characters.',
+            'name' => 'Divisi',
+        ];
+    }
+
+
+    public function messages() : array
+    {
+        return [
+            'required' => ':attribute Tidak Boleh Kosong',
         ];
     }
 

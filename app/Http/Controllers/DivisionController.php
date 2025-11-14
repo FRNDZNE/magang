@@ -12,8 +12,8 @@ class DivisionController extends Controller
      */
     public function index()
     {
-        $data = Division::orderby('created_at', 'desc')->paginate(5);
-        return view('division.index', compact('data'));
+        $division = Division::orderby('created_at', 'desc')->paginate(5);
+        return view('division.index', compact('division'));
     }
 
     /**
@@ -29,9 +29,13 @@ class DivisionController extends Controller
      */
     public function store(DivisionRequest $request)
     {
-        Division::create($request->validated());
-        return redirect()->route('divisions.index')
-        ->with('success', 'Division created successfully.');
+        try {
+            $data = $request->validated();
+            Division::create($data);
+            return redirect()->route('divisions.index')->with('success','Berhasil Menambah Divisi !');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -52,19 +56,28 @@ class DivisionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(DivisionRequest $request, Division $division)
+    public function update(DivisionRequest $request, $id)
     {
-        $division->update($request->validated());
-        return redirect()->route('divisions.index')
-        ->with('success', 'Division updated successfully.');
+        try {
+            $data = $request->validated();
+            $division = Division::find($id);
+            $division->update($data);
+            return redirect()->route('divisions.index')->with('success','Berhasil Mengubah Divisi !');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Division $division)
+    public function destroy($id)
     {
-        $division->delete();
-        return back()->with('success','Division deleted successfully.');
+        try {
+            Division::find($id)->delete();
+            return redirect()->back()->with('success','Berhasil Menghapus Divisi !');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 }
