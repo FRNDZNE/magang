@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mentor;
+use App\Models\Division;
 use Illuminate\Http\Request;
 
 class MentorController extends Controller
@@ -21,7 +22,8 @@ class MentorController extends Controller
      */
     public function create()
     {
-        return view('mentor.create');
+        $divisions = Division::all();
+        return view('mentor.create',compact('divisions'));
     }
 
     /**
@@ -47,7 +49,8 @@ class MentorController extends Controller
      */
     public function edit(Mentor $mentor)
     {
-        return view('mentor.edit', compact('mentor'));
+        $divisions = Division::all();
+        return view('mentor.edit', compact('mentor','divisions'));
     }
 
     /**

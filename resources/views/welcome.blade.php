@@ -10,14 +10,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-        body {
-            background-color: #7f8c8d;
-            /* abu abu */
-        }
-
         .brand-in {
-            background: #ffffff;
-            color: #000;
+            background: grey;
+            color: white;
             padding: 0 6px;
             border-radius: 4px;
             font-weight: 700;
@@ -45,7 +40,7 @@
 
         <!-- Tombol -->
         <div class="d-flex gap-3">
-            <a href="{{ route('login') }}" class="btn btn-secondary px-4">Login</a>
+            <a href="{{ route('login') }}" class="btn btn-primary px-4">Login</a>
             <a href="{{ route('register') }}" class="btn btn-outline-dark px-4">Register</a>
         </div>
 

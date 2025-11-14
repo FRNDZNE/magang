@@ -22,26 +22,24 @@ class MentorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'employee_number' => 'required|string|unique:mentors,employee_number,',
-            'phone' => 'required|string|max:15',
-            'user_id' => 'required|exists:users,id',
-            'division_id' => 'required|exists:divisions,id',
+            'guard_name' => 'required'
         ];
     }
 
-        public function messages(): array
+    public function attributes() : array
     {
         return [
-            'employee_number.required' => 'The employee number is required.',
-            'employee_number.string' => 'The employee number must be a string.',
-            'employee_number.unique' => 'The employee number has already been taken.',
-            'phone.required' => 'The phone number is required.',
-            'phone.string' => 'The phone number must be a string.',
-            'phone.max' => 'The phone number may not be greater than 15 characters.',
-            'user_id.required' => 'The user is required.',
-            'user_id.exists' => 'The selected user is invalid.',
-            'division_id.required' => 'The division is required.',
-            'division_id.exists' => 'The selected division is invalid.',
+            'name' => 'Nama Role',
+            'guard_name' => 'Nama Display'
+        ];
+    }
+
+
+    public function messages() : array
+    {
+        return [
+            'required' => ':attribute Tidak Boleh Kosong',
+            'regex' => ':attribute Tidak Boleh Mengandung Spasi',
         ];
     }
 }

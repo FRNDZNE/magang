@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Managemen Role')
+@section('title', 'Managemen Permission')
 @section('role', 'Nanti ada role disini')
 @section('page-active', 'active')
 @section('content')
@@ -11,7 +11,6 @@
             <button type="button" class="btn btn-primary btn-md" data-bs-toggle="modal" data-bs-target="#createPermission">
                 <i class="bi bi-plus"></i> Tambah Permission
             </button>
-
             <div class="modal fade" id="createPermission" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
                 role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
