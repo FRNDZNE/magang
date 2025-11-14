@@ -12,7 +12,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $data = Student::orderby('created_at', 'desc')->paginate(5);
+        return view('student.index', compact('data'));
     }
 
     /**
@@ -20,7 +21,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('student.create');
     }
 
     /**
@@ -28,7 +29,8 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->route('students.index')
+        ->with('success', 'Student created successfully.');
     }
 
     /**
@@ -36,7 +38,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
+        return view('student.show', compact('student'));
     }
 
     /**
@@ -44,7 +46,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return view('student.edit', compact('student'));
     }
 
     /**
@@ -52,7 +54,9 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $student->update($request->validated());
+        return redirect()->route('students.index')
+        ->with('success', 'Student updated successfully.');
     }
 
     /**
@@ -60,6 +64,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return back()->with('success','Student deleted successfully.');
     }
 }

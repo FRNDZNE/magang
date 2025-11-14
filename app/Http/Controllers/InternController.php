@@ -12,7 +12,8 @@ class InternController extends Controller
      */
     public function index()
     {
-        //
+        $data = Intern::orderby('created_at', 'desc')->paginate(5);
+        return view('intern.index', compact('data'));
     }
 
     /**
@@ -20,7 +21,7 @@ class InternController extends Controller
      */
     public function create()
     {
-        //
+        return view('intern.create');
     }
 
     /**
@@ -28,7 +29,9 @@ class InternController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Intern::create($request->validated());
+        return redirect()->route('interns.index')
+        ->with('success', 'Intern created successfully.');
     }
 
     /**
@@ -36,7 +39,7 @@ class InternController extends Controller
      */
     public function show(Intern $intern)
     {
-        //
+        return view('intern.show', compact('intern'));
     }
 
     /**
@@ -44,7 +47,7 @@ class InternController extends Controller
      */
     public function edit(Intern $intern)
     {
-        //
+        return view('intern.edit', compact('intern'));
     }
 
     /**
@@ -52,7 +55,9 @@ class InternController extends Controller
      */
     public function update(Request $request, Intern $intern)
     {
-        //
+        $intern->update($request->validated());
+        return redirect()->route('interns.index')
+        ->with('success', 'Intern updated successfully.');
     }
 
     /**
@@ -60,6 +65,7 @@ class InternController extends Controller
      */
     public function destroy(Intern $intern)
     {
-        //
+        $intern->delete();
+        return back()->with('success','Intern deleted successfully.');
     }
 }

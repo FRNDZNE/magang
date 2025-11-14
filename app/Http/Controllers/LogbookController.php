@@ -12,7 +12,8 @@ class LogbookController extends Controller
      */
     public function index()
     {
-        //
+        $data = Logbook::orderby('created_at', 'desc')->paginate(5);
+        return view('logbook.index', compact('data'));
     }
 
     /**
@@ -20,7 +21,7 @@ class LogbookController extends Controller
      */
     public function create()
     {
-        //
+        return view('logbook.create');
     }
 
     /**
@@ -28,7 +29,9 @@ class LogbookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Logbook::create($request->validated());
+        return redirect()->route('logbooks.index')
+        ->with('success', 'Logbook created successfully.');
     }
 
     /**
@@ -36,7 +39,7 @@ class LogbookController extends Controller
      */
     public function show(Logbook $logbook)
     {
-        //
+        return view('logbook.show', compact('logbook'));
     }
 
     /**
@@ -44,7 +47,7 @@ class LogbookController extends Controller
      */
     public function edit(Logbook $logbook)
     {
-        //
+        return view('logbook.edit', compact('logbook'));
     }
 
     /**
@@ -52,7 +55,9 @@ class LogbookController extends Controller
      */
     public function update(Request $request, Logbook $logbook)
     {
-        //
+        $logbook->update($request->validated());
+        return redirect()->route('logbooks.index')
+        ->with('success', 'Logbook updated successfully.');
     }
 
     /**
@@ -60,6 +65,7 @@ class LogbookController extends Controller
      */
     public function destroy(Logbook $logbook)
     {
-        //
+        $logbook->delete();
+        return back()->with('success','Logbook deleted successfully.');
     }
 }

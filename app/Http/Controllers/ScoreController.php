@@ -12,7 +12,9 @@ class ScoreController extends Controller
      */
     public function index()
     {
-        //
+        $data = Score::orderby('created_at', 'desc')->paginate(5);
+        dd("Controller ok");
+        return view('division.index', compact('data'));
     }
 
     /**
@@ -20,7 +22,7 @@ class ScoreController extends Controller
      */
     public function create()
     {
-        //
+        return view('score.create');
     }
 
     /**
@@ -28,7 +30,9 @@ class ScoreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Score::create($request->validated());
+        return redirect()->route('scores.index')
+        ->with('success', 'Score created successfully.');
     }
 
     /**
@@ -36,7 +40,7 @@ class ScoreController extends Controller
      */
     public function show(Score $score)
     {
-        //
+        return view('score.show', compact('score'));
     }
 
     /**
@@ -44,7 +48,7 @@ class ScoreController extends Controller
      */
     public function edit(Score $score)
     {
-        //
+        return view('score.edit', compact('score'));
     }
 
     /**
@@ -52,7 +56,9 @@ class ScoreController extends Controller
      */
     public function update(Request $request, Score $score)
     {
-        //
+        $score->update($request->validated());
+        return redirect()->route('scores.index')
+        ->with('success', 'Score updated successfully.');
     }
 
     /**
@@ -60,6 +66,7 @@ class ScoreController extends Controller
      */
     public function destroy(Score $score)
     {
-        //
+        $score->delete();
+        return back()->with('success','Score deleted successfully.');
     }
 }

@@ -12,7 +12,8 @@ class MentorController extends Controller
      */
     public function index()
     {
-        //
+        $data = Mentor::orderby('created_at', 'desc')->paginate(5);
+        return view('mentor.index', compact('data'));
     }
 
     /**
@@ -20,7 +21,7 @@ class MentorController extends Controller
      */
     public function create()
     {
-        //
+        return view('mentor.create');
     }
 
     /**
@@ -28,7 +29,9 @@ class MentorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Mentor::create($request->validated());
+        return redirect()->route('mentors.index')
+        ->with('success', 'Mentor created successfully.');
     }
 
     /**
@@ -36,7 +39,7 @@ class MentorController extends Controller
      */
     public function show(Mentor $mentor)
     {
-        //
+        return view('mentor.show', compact('mentor'));
     }
 
     /**
@@ -44,7 +47,7 @@ class MentorController extends Controller
      */
     public function edit(Mentor $mentor)
     {
-        //
+        return view('mentor.edit', compact('mentor'));
     }
 
     /**
@@ -52,7 +55,9 @@ class MentorController extends Controller
      */
     public function update(Request $request, Mentor $mentor)
     {
-        //
+        $mentor->update($request->validated());
+        return redirect()->route('mentors.index')
+        ->with('success', 'Mentor updated successfully.');
     }
 
     /**
@@ -60,6 +65,7 @@ class MentorController extends Controller
      */
     public function destroy(Mentor $mentor)
     {
-        //
+        $mentor->delete();
+        return back()->with('success','Mentor deleted successfully.');
     }
 }

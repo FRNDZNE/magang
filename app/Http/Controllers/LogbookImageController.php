@@ -12,7 +12,8 @@ class LogbookImageController extends Controller
      */
     public function index()
     {
-        //
+        $data = LogbookImage::orderby('created_at', 'desc')->paginate(5);
+        return view('logbook_image.index', compact('data'));
     }
 
     /**
@@ -20,7 +21,7 @@ class LogbookImageController extends Controller
      */
     public function create()
     {
-        //
+        return view('logbook_image.create');
     }
 
     /**
@@ -28,7 +29,9 @@ class LogbookImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        LogbookImage::create($request->validated());
+        return redirect()->route('logbook_images.index')
+        ->with('success', 'Logbook Image created successfully.');
     }
 
     /**
@@ -36,7 +39,7 @@ class LogbookImageController extends Controller
      */
     public function show(LogbookImage $logbookImage)
     {
-        //
+        return view('logbook_image.show', compact('logbookImage'));
     }
 
     /**
@@ -44,7 +47,7 @@ class LogbookImageController extends Controller
      */
     public function edit(LogbookImage $logbookImage)
     {
-        //
+        return view('logbook_image.edit', compact('logbookImage'));
     }
 
     /**
@@ -52,7 +55,9 @@ class LogbookImageController extends Controller
      */
     public function update(Request $request, LogbookImage $logbookImage)
     {
-        //
+        $logbookImage->update($request->validated());
+        return redirect()->route('logbook_images.index')
+        ->with('success', 'Logbook Image updated successfully.');
     }
 
     /**
@@ -60,6 +65,7 @@ class LogbookImageController extends Controller
      */
     public function destroy(LogbookImage $logbookImage)
     {
-        //
+        $logbookImage->delete();
+        return back()->with('success','Logbook Image deleted successfully.');
     }
 }

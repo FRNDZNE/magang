@@ -5,6 +5,15 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\MentorController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ScoreController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\InternController;
+use App\Http\Controllers\LogbookController;
+use App\Http\Controllers\LogbookImageController;
+use App\Http\Controllers\ScoreValueController;
+
 
 
 Route::get('/', function () {
@@ -28,6 +37,10 @@ Route::get('templating', function () {
 Route::resource('students', StudentController::class);
 Route::resource('divisions', DivisionController::class);
 Route::resource('mentors', MentorController::class);
+Route::resource('interns', InternController::class);
+Route::resource('scores', ScoreController::class);
+Route::resource('score-values', ScoreValueController::class);
+
 
 Route::resource('roles',RoleController::class)->only([
     'index', 'store','update'

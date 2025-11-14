@@ -30,7 +30,8 @@ class DivisionController extends Controller
     public function store(DivisionRequest $request)
     {
         Division::create($request->validated());
-        return redirect()->route('divisions.index')->with('success', 'Division created successfully.');
+        return redirect()->route('divisions.index')
+        ->with('success', 'Division created successfully.');
     }
 
     /**
@@ -54,7 +55,8 @@ class DivisionController extends Controller
     public function update(DivisionRequest $request, Division $division)
     {
         $division->update($request->validated());
-        return redirect()->route('divisions.index')->with('success', 'Division updated successfully.');
+        return redirect()->route('divisions.index')
+        ->with('success', 'Division updated successfully.');
     }
 
     /**
@@ -62,6 +64,7 @@ class DivisionController extends Controller
      */
     public function destroy(Division $division)
     {
-        //
+        $division->delete();
+        return back()->with('success','Division deleted successfully.');
     }
 }
