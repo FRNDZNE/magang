@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Manajemen Penilaian')
-@section('role', 'Nanti ada role disini')
+@section('role', ucfirst(Auth::user()->getRoleNames()->first()))
 @section('page-active', 'active')
 @section('content')
     <div class="card">
@@ -30,63 +30,43 @@
                             <td>{{ $s->description }}</td>
                             <td>
                                 {{-- Button Detail --}}
-                                <a href="{{ route('scores.show', $s->id) }}" class="btn btn-md btn-info"><i class="bi bi-eye"></i></a>
+                                <a href="{{ route('scores.show', $s->id) }}" class="btn btn-md btn-info"><i
+                                        class="bi bi-eye"></i></a>
                                 {{-- End Button Detail --}}
 
                                 {{-- Button Edit --}}
-                                <a href="{{ route('scores.edit', $s->id) }}" class="btn btn-md btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                <a href="{{ route('scores.edit', $s->id) }}" class="btn btn-md btn-warning"><i
+                                        class="bi bi-pencil-square"></i></a>
                                 {{-- End Button Edit --}}
 
                                 {{-- Button Hapus --}}
 
                                 <!-- Modal trigger button -->
-                                <button
-                                    type="button"
-                                    class="btn btn-danger btn-md-danger"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modalId-{{ $s->id }}"
-                                >
+                                <button type="button" class="btn btn-danger btn-md-danger" data-bs-toggle="modal"
+                                    data-bs-target="#modalId-{{ $s->id }}">
                                     <i class="bi bi-trash"></i>
                                 </button>
 
                                 <!-- Modal Body -->
                                 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-                                <div
-                                    class="modal fade"
-                                    id="modalId-{{ $s->id }}"
-                                    tabindex="-1"
-                                    data-bs-backdrop="static"
-                                    data-bs-keyboard="false"
-
-                                    role="dialog"
-                                    aria-labelledby="modalTitleId"
-                                    aria-hidden="true"
-                                >
-                                    <div
-                                        class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md"
-                                        role="document"
-                                    >
+                                <div class="modal fade" id="modalId-{{ $s->id }}" tabindex="-1"
+                                    data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+                                    aria-labelledby="modalTitleId" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md"
+                                        role="document">
                                         <div class="modal-content">
                                             <div class="modal-header bg-danger">
                                                 <h5 class="modal-title text-white" id="modalTitleId">
                                                     Hapus Aspek Penilaian
                                                 </h5>
-                                                <button
-                                                    type="button"
-                                                    class="btn-close"
-                                                    data-bs-dismiss="modal"
-                                                    aria-label="Close"
-                                                ></button>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Anda Yakin Hapus {{$s->name}} dari Aspek Penilaian ?</p>
+                                                <p>Anda Yakin Hapus {{ $s->name }} dari Aspek Penilaian ?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button
-                                                    type="button"
-                                                    class="btn btn-secondary"
-                                                    data-bs-dismiss="modal"
-                                                >
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                                     Kembali
                                                 </button>
                                                 <form action="{{ route('scores.destroy', $s->id) }}" method="post">

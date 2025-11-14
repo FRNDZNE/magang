@@ -13,8 +13,7 @@ class ScoreValueController extends Controller
      */
     public function index()
     {
-        $data = ScoreValue::orderby('created_at', 'desc')->paginate(5);
-        return view('scorevalue.index', compact('data'));
+        
     }
 
     /**
@@ -22,7 +21,7 @@ class ScoreValueController extends Controller
      */
     public function create()
     {
-        return view('scorevalue.create');
+
     }
 
     /**
@@ -30,9 +29,7 @@ class ScoreValueController extends Controller
      */
     public function store(Request $request)
     {
-        Student::create($request->validated());
-        return redirect()->route('scorevalues.index')
-        ->with('success', 'Score Value created successfully.');
+        
     }
 
     /**
@@ -40,7 +37,6 @@ class ScoreValueController extends Controller
      */
     public function show(ScoreValue $scoreValue)
     {
-        return view('scorevalue.show', compact('scoreValue'));
     }
 
     /**
@@ -48,7 +44,6 @@ class ScoreValueController extends Controller
      */
     public function edit(ScoreValue $scoreValue)
     {
-        return view('scorevalue.edit', compact('scoreValue'));
     }
 
     /**
@@ -56,9 +51,7 @@ class ScoreValueController extends Controller
      */
     public function update(Request $request, ScoreValue $scoreValue)
     {
-        $scoreValue->update($request->validated());
-        return redirect()->route('scorevalues.index')
-        ->with('success', 'Score Value updated successfully.');
+        
     }
 
     /**
@@ -66,7 +59,6 @@ class ScoreValueController extends Controller
      */
     public function destroy(ScoreValue $scoreValue)
     {
-        $scoreValue->delete();
-        return back()->with('success','Score Value deleted successfully.');
+        
     }
 }

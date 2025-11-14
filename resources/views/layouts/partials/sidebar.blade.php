@@ -4,7 +4,8 @@
         <!--begin::Brand Link-->
         <a href="./index.html" class="brand-link">
             <!--begin::Brand Image-->
-            <img src="{{asset('/')}}/assets/img/logomagang.png" alt="Magang Logo" class="brand-image opacity-75 shadow" />
+            <img src="{{ asset('/') }}/assets/img/logomagang.png" alt="Magang Logo"
+                class="brand-image opacity-75 shadow" />
             <!--end::Brand Image-->
             <!--begin::Brand Text-->
             <span class="brand-text fw-light">
@@ -31,13 +32,15 @@
                 </li>
                 <li class="nav-header">Mentor dan Divisi</li>
                 <li class="nav-item">
-                    <a href="{{ route('divisions.index') }}" class="nav-link">
+                    <a href="{{ route('divisions.index') }}"
+                        class="nav-link {{ Route::is('divisions.*') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-diagram-3"></i>
                         <p>Divisi</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('mentors.index') }}" class="nav-link">
+                    <a href="{{ route('mentors.index') }}"
+                        class="nav-link {{ Route::is('mentors.*') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-person-badge"></i>
                         <p>Mentor</p>
                     </a>
@@ -57,7 +60,7 @@
                 </li>
                 <li class="nav-header">Penilaian</li>
                 <li class="nav-item">
-                    <a href="{{ route('scores.index') }}" class="nav-link">
+                    <a href="{{ route('scores.index') }}" class="nav-link {{ Route::is('scores.*') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-clipboard-check"></i>
                         <p>Penilaian</p>
                     </a>
@@ -77,15 +80,14 @@
                 </li>
                 <li class="nav-header">Role & Permission</li>
                 <li class="nav-item">
-                    <a href="{{ route('roles.index') }}"
-                        class="nav-link {{ Route::is('roles.index') ? 'active' : '' }}">
+                    <a href="{{ route('roles.index') }}" class="nav-link {{ Route::is('roles.*') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-journal-text"></i>
                         <p>Role</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('permissions.index') }}"
-                        class="nav-link {{ Route::is('permissions.index') ? 'active' : '' }}">
+                        class="nav-link {{ Route::is('permissions.*') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-calendar-check"></i>
                         <p>Permission</p>
                     </a>

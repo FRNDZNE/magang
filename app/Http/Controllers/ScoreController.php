@@ -30,10 +30,10 @@ class ScoreController extends Controller
     public function store(ScoreRequest $request)
     {
         try{
-        $data = $request->validated();
-        Score::create($data);
-        return redirect()->route('scores.index')
-        ->with('success', 'Berhasil Menambah Nilai !');
+            $data = $request->validated();
+            Score::create($data);
+            return redirect()->route('scores.index')
+            ->with('success', 'Berhasil Menambah Nilai !');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());
         }

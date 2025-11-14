@@ -32,6 +32,23 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    public function attributes() : array
+    {
+        return [
+            'email' => 'E-Mail',
+            'password' => 'Password'
+        ];
+    }
+
+
+    public function messages() : array
+    {
+        return [
+            'required' => ':attribute Tidak Boleh Kosong',
+            'email' => 'Masukan :attribute Dengan Benar',
+        ];
+    }
+
     /**
      * Attempt to authenticate the request's credentials.
      *

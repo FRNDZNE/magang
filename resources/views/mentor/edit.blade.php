@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Manajemen Mentor')
-@section('role', 'Nanti ada role disini')
+@section('role', ucfirst(Auth::user()->getRoleNames()->first()))
 @section('breadcrumb')
     <li class="breadcrumb-item active">Edit Mentor</li>
 @endsection

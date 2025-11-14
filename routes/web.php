@@ -8,17 +8,12 @@ use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ScoreController;
-use App\Http\Controllers\AttendanceController;
-use App\Http\Controllers\InternController;
-use App\Http\Controllers\LogbookController;
-use App\Http\Controllers\LogbookImageController;
-use App\Http\Controllers\ScoreValueController;
 
 
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -13,8 +13,7 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        $data = Attendance::orderby('created_at', 'desc')->paginate(5);
-        return view('attendance.index', compact('data'));
+        
     }
 
     /**
@@ -22,7 +21,6 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        return view('attendance.create');
     }
 
     /**
@@ -30,9 +28,7 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        Score::create($request->validated());
-        return redirect()->route('attendances.index')
-        ->with('success', 'Attendance created successfully.');
+        
     }
 
     /**
@@ -40,7 +36,6 @@ class AttendanceController extends Controller
      */
     public function show(Attendance $attendance)
     {
-        return view('attendance.show', compact('attendance'));
     }
 
     /**
@@ -48,7 +43,6 @@ class AttendanceController extends Controller
      */
     public function edit(Attendance $attendance)
     {
-        return view('attendance.edit', compact('attendance'));
     }
 
     /**
@@ -56,9 +50,7 @@ class AttendanceController extends Controller
      */
     public function update(Request $request, Attendance $attendance)
     {
-        $attendance->update($request->validated());
-        return redirect()->route('attendances.index')
-        ->with('success', 'Attendance updated successfully.');
+        
     }
 
     /**
@@ -66,7 +58,6 @@ class AttendanceController extends Controller
      */
     public function destroy(Attendance $attendance)
     {
-        $attendance->delete();
-        return back()->with('success','Attendance deleted successfully.');
+        
     }
 }

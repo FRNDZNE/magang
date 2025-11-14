@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('title', 'Manajemen Penilaian')
-@section('role', 'Nanti ada role disini')
+@section('role', ucfirst(Auth::user()->getRoleNames()->first()))
 @section('breadcrumb')
     <li class="breadcrumb-item active" aria-current="page">Edit Aspek Penilaian</li>
 @endsection
 @section('content')
-<div class="card">
+    <div class="card">
         <div class="card-header">
             <h3 class="card-title">Form Edit Aspek Penilaian</h3>
         </div>
@@ -28,7 +28,9 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Keaterangan</label>
-                    <textarea name="description"  class="form-control @error('description') is-invalid @else @if (old('description')) is-valid @endif @enderror" id="description" cols="30" rows="10">{{$score->description ?? ''}}</textarea>
+                    <textarea name="description"
+                        class="form-control @error('description') is-invalid @else @if (old('description')) is-valid @endif @enderror"
+                        id="description" cols="30" rows="10">{{ $score->description ?? '' }}</textarea>
                     @error('description')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @else
@@ -45,4 +47,3 @@
         </form>
     </div>
 @endsection
-
