@@ -3,43 +3,65 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class MentorRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            'guard_name' => 'required'
+            'name' => ['required'],
+            
+            // email berada di tabel users
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users', 'email')->ignore($this->mentor?->user_id), 
+                // abaikan user dengan email yang sama jika sedang mengedit
+            ],
+
+            'password' => [
+                $this->mentor ? 'nullable' : 'required', 
+                // saat edit password boleh kosong
+            ],
+
+            'division_id'     => ['required'],
+            'employee_number' => ['required'],
+            'phone'           => [
+                'required',
+                'regex:/^62[0-9]+$/',
+                'min:10',
+                'max:13',
+            ],
         ];
     }
 
-    public function attributes() : array
+    public function attributes(): array
     {
         return [
-            'name' => 'Nama Role',
-            'guard_name' => 'Nama Display'
+            'name'            => 'Nama',
+            'email'           => 'E-Mail',
+            'password'        => 'Password',
+            'division_id'     => 'Divisi',
+            'employee_number' => 'Nomor Registrasi Pegawai',
+            'phone'           => 'Nomor Telepon',
         ];
     }
 
-
-    public function messages() : array
+    public function messages(): array
     {
         return [
             'required' => ':attribute Tidak Boleh Kosong',
-            'regex' => ':attribute Tidak Boleh Mengandung Spasi',
+            'email'    => ':attribute harus berupa alamat email yang valid',
+            'unique' => ':attribute sudah digunakan',
+            'regex' => ':attribute harus menggunakan format 62xxxxxxxxxxx dan hanya angka.',
+            'min' => ':attribute Minimal :min Digit',
+            'max' => ':attribute Maksimal :max Digit',
         ];
     }
 }

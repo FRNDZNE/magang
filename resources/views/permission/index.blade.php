@@ -38,7 +38,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="guard_name">Display</label>
+                                    <label for="guard_name">Guard</label>
                                     <input type="text" name="guard_name" id="guard_name"
                                         class="form-control @error('guard_name') is-invalid @else @if (old('guard_name')) is-valid @endif @enderror"
                                         value="{{ old('guard_name') }}">
