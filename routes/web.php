@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\MentorController;
+
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
@@ -20,5 +24,17 @@ Route::middleware('auth')->group(function () {
 Route::get('templating', function () {
     return view('layouts.app');
 })->name('templating');
+
+Route::resource('students', StudentController::class);
+Route::resource('divisions', DivisionController::class);
+Route::resource('mentors', MentorController::class);
+
+Route::resource('roles',RoleController::class)->only([
+    'index', 'store','update'
+]);
+
+Route::resource('permissions',PermissionController::class)->only([
+    'index', 'store','update'
+]);
 
 require __DIR__.'/auth.php';

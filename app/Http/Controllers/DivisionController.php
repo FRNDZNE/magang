@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DivisionRequest;
 use App\Models\Division;
-use Illuminate\Http\Request;
 
 class DivisionController extends Controller
 {
@@ -12,7 +12,8 @@ class DivisionController extends Controller
      */
     public function index()
     {
-        //
+        $data = Division::orderby('created_at', 'desc')->paginate(5);
+        return view('division.index', compact('data'));
     }
 
     /**
@@ -20,15 +21,16 @@ class DivisionController extends Controller
      */
     public function create()
     {
-        //
+        return view('division.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(DivisionRequest $request)
     {
-        //
+        Division::create($request->validated());
+        return redirect()->route('divisions.index')->with('success', 'Division created successfully.');
     }
 
     /**
@@ -36,23 +38,23 @@ class DivisionController extends Controller
      */
     public function show(Division $division)
     {
-        //
-    }
+        return view('division.show', compact('division'));   }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Division $division)
     {
-        //
+        return view('division.edit', compact('division'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Division $division)
+    public function update(DivisionRequest $request, Division $division)
     {
-        //
+        $division->update($request->validated());
+        return redirect()->route('divisions.index')->with('success', 'Division updated successfully.');
     }
 
     /**
