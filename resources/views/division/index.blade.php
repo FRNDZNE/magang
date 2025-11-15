@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Manajemen Divisi')
-@section('role', 'Nanti ada role disini')
+@section('role', ucfirst(Auth::user()->getRoleNames()->first()))
 @section('page-active', 'active')
 @section('content')
     <div class="card">
