@@ -58,15 +58,15 @@
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                     @role('admin')
-                        <img src="{{ asset('/') }}/assets/img/admin-160x160.jpg" class="user-image rounded-circle shadow"
+                        <img src="{{ asset('/') }}/assets/img/admin-160x160.png" class="user-image rounded-circle shadow"
                             alt="User Image" />
                     @endrole
                     @role('mentor')
-                        <img src="{{ asset('/') }}/assets/img/mentor-160x160.jpg"
+                        <img src="{{ asset('/') }}/assets/img/mentor-160x160.png"
                             class="user-image rounded-circle shadow" alt="User Image" />
                     @endrole
                     @role('student')
-                        <img src="{{ asset('/') }}/assets/img/student-160x160.jpg"
+                        <img src="{{ asset('/') }}/assets/img/student-160x160.png"
                             class="user-image rounded-circle shadow" alt="User Image" />
                     @endrole
                     <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
@@ -75,15 +75,15 @@
                     <!--begin::User Image-->
                     <li class="user-header text-bg-primary">
                         @role('admin')
-                            <img src="{{ asset('/') }}/assets/img/admin-160x160.jpg" class="rounded-circle shadow"
+                            <img src="{{ asset('/') }}/assets/img/admin-160x160.png" class="rounded-circle shadow"
                                 alt="User Image" />
                         @endrole
                         @role('mentor')
-                            <img src="{{ asset('/') }}/assets/img/mentor-160x160.jpg" class="rounded-circle shadow"
+                            <img src="{{ asset('/') }}/assets/img/mentor-160x160.png" class="rounded-circle shadow"
                                 alt="User Image" />
                         @endrole
                         @role('student')
-                            <img src="{{ asset('/') }}/assets/img/student-160x160.jpg" class="rounded-circle shadow"
+                            <img src="{{ asset('/') }}/assets/img/student-160x160.png" class="rounded-circle shadow"
                                 alt="User Image" />
                         @endrole
                         <p>
