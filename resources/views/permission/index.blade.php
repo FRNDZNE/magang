@@ -188,6 +188,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="card-footer">
+            {{ $permissions->links() }}
+        </div>
     </div>
 
 

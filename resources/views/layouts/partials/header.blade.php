@@ -57,15 +57,35 @@
             <!--begin::User Menu Dropdown-->
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                    <img src="{{ asset('/') }}/assets/img/user2-160x160.jpg" class="user-image rounded-circle shadow"
-                        alt="User Image" />
+                    @role('admin')
+                        <img src="{{ asset('/') }}/assets/img/admin-160x160.jpg" class="user-image rounded-circle shadow"
+                            alt="User Image" />
+                    @endrole
+                    @role('mentor')
+                        <img src="{{ asset('/') }}/assets/img/mentor-160x160.jpg"
+                            class="user-image rounded-circle shadow" alt="User Image" />
+                    @endrole
+                    @role('student')
+                        <img src="{{ asset('/') }}/assets/img/student-160x160.jpg"
+                            class="user-image rounded-circle shadow" alt="User Image" />
+                    @endrole
                     <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                     <!--begin::User Image-->
                     <li class="user-header text-bg-primary">
-                        <img src="{{ asset('/') }}/assets/img/user2-160x160.jpg" class="rounded-circle shadow"
-                            alt="User Image" />
+                        @role('admin')
+                            <img src="{{ asset('/') }}/assets/img/admin-160x160.jpg" class="rounded-circle shadow"
+                                alt="User Image" />
+                        @endrole
+                        @role('mentor')
+                            <img src="{{ asset('/') }}/assets/img/mentor-160x160.jpg" class="rounded-circle shadow"
+                                alt="User Image" />
+                        @endrole
+                        @role('student')
+                            <img src="{{ asset('/') }}/assets/img/student-160x160.jpg" class="rounded-circle shadow"
+                                alt="User Image" />
+                        @endrole
                         <p>
                             {{ Auth::user()->name }} - {{ ucfirst(Auth::user()->getRoleNames()->first()) }}
                             <small>{{ ucfirst(Auth::user()->getRoleNames()->first()) }} since
