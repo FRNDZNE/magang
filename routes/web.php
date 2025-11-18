@@ -9,11 +9,9 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ScoreController;
 
-
-
 Route::get('/', function () {
     return view('welcome');
-})->name('welcome');
+})->name('welcome')->middleware('guest');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -25,24 +23,21 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('templating', function () {
-    return view('layouts.app');
-})->name('templating');
-
-Route::resource('students', StudentController::class);
-Route::resource('divisions', DivisionController::class);
-Route::resource('mentors', MentorController::class);
-Route::resource('interns', InternController::class);
-Route::resource('scores', ScoreController::class);
-Route::resource('score-values', ScoreValueController::class);
-
-
-Route::resource('roles',RoleController::class)->only([
-    'index', 'store','update','destroy'
-]);
-
-Route::resource('permissions',PermissionController::class)->only([
-    'index', 'store','update','destroy'
-]);
+Route::middleware('auth')->group(function(){
+    Route::resource('students', StudentController::class);
+    Route::resource('divisions', DivisionController::class);
+    Route::resource('mentors', MentorController::class);
+    Route::resource('interns', InternController::class);
+    Route::resource('scores', ScoreController::class);
+    Route::resource('score-values', ScoreValueController::class);
+    
+    Route::resource('roles',RoleController::class)->only([
+        'index', 'store','update','destroy'
+    ]);
+    
+    Route::resource('permissions',PermissionController::class)->only([
+        'index', 'store','update','destroy'
+    ]);
+});
 
 require __DIR__.'/auth.php';

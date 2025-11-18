@@ -30,7 +30,7 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-header">Mentor dan Divisi</li>
+                <li class="nav-header">Divisi</li>
                 <li class="nav-item">
                     <a href="{{ route('divisions.index') }}"
                         class="nav-link {{ Route::is('divisions.*') ? 'active' : '' }}">
@@ -38,24 +38,12 @@
                         <p>Divisi</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('mentors.index') }}"
-                        class="nav-link {{ Route::is('mentors.*') ? 'active' : '' }}">
-                        <i class="nav-icon bi bi-person-badge"></i>
-                        <p>Mentor</p>
-                    </a>
-                </li>
+
                 <li class="nav-header">Magang</li>
                 <li class="nav-item">
                     <a href="./docs/introduction.html" class="nav-link">
                         <i class="nav-icon bi bi-file-earmark-plus"></i>
                         <p>Pengajuan Magang</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="./docs/introduction.html" class="nav-link">
-                        <i class="nav-icon bi bi-people"></i>
-                        <p>Mahasiswa Magang</p>
                     </a>
                 </li>
                 <li class="nav-header">Penilaian</li>
@@ -90,6 +78,20 @@
                         class="nav-link {{ Route::is('permissions.*') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-calendar-check"></i>
                         <p>Permission</p>
+                    </a>
+                </li>
+                <div class="nav-header">User</div>
+                <li class="nav-item">
+                    <a href="{{ route('mentors.index') }}"
+                        class="nav-link {{ Route::is('mentors.*') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-person-badge"></i>
+                        <p>Mentor</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon bi bi-people"></i>
+                        <p>Student</p>
                     </a>
                 </li>
             </ul>

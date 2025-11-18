@@ -13,7 +13,7 @@
         <!--begin::End Navbar Links-->
         <ul class="navbar-nav ms-auto">
 
-            <!--begin::Messages Dropdown Menu-->
+            <!--begin::Notification Dropdown Menu-->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-bs-toggle="dropdown" href="#">
                     <i class="bi bi-bell-fill"></i>
@@ -45,7 +45,7 @@
                     <a href="#" class="dropdown-item dropdown-footer">See All Notification</a>
                 </div>
             </li>
-            <!--end::Messages Dropdown Menu-->
+            <!--end::Notification Dropdown Menu-->
             <!--begin::Fullscreen Toggle-->
             <li class="nav-item">
                 <a class="nav-link" href="#" data-lte-toggle="fullscreen">

@@ -24,11 +24,12 @@ class PermissionRequest extends FormRequest
         return [
             'name' => [
                 'required',
-                'regex:/^\S+$/', // tidak boleh ada spasi
+                'unique:permissions,name,' . $this->permission?->id,
+                'regex:/^\S+$/',
             ],
-
-            'guard_name' => 'required'
+            'guard_name' => ['required']
         ];
+
     }
 
     public function attributes() : array
@@ -45,6 +46,7 @@ class PermissionRequest extends FormRequest
         return [
             'required' => ':attribute Tidak Boleh Kosong',
             'regex' => ':attribute Tidak Boleh Mengandung Spasi',
+            'unique' => ':attribute Sudah Digunakan'
         ];
     }
 }

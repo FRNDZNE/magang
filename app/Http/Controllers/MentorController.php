@@ -41,6 +41,7 @@ class MentorController extends Controller
                 $user = User::create([
                     'name' => $form['name'],
                     'uuid' => Str::uuid(),
+                    'email_verified_at' => now(),
                     'email' => $form['email'],
                     'password' => bcrypt($form['password'])
                 ]);

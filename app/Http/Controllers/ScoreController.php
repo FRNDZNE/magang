@@ -7,6 +7,10 @@ use App\Http\Requests\ScoreRequest;
 
 class ScoreController extends Controller
 {
+    public function __construct()
+    {
+                
+    }
     /**
      * Display a listing of the resource.
      */

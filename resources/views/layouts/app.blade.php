@@ -50,10 +50,10 @@
     <!--begin::App Wrapper-->
     <div class="app-wrapper">
         <!--begin::Header-->
-        @include('layouts.partials.header')
+        @include('layouts.partials.header.header')
         <!--end::Header-->
         <!--begin::Sidebar-->
-        @include('layouts.partials.sidebar')
+        @include('layouts.partials.sidebar.sidebar')
         <!--end::Sidebar-->
         <!--begin::App Main-->
         <main class="app-main">
