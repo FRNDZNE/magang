@@ -6,7 +6,6 @@ use App\Models\Student;
 use App\Models\User;
 use App\Models\Intern;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Requests\StudentRequest;
 use Illuminate\Support\Facades\DB;
 
@@ -79,7 +78,7 @@ class StudentController extends Controller
     public function edit(Student $student)
     {
         $students = Student::all();
-        return view('student.edit', compact('intern','student'));
+        return view('student.edit', compact('student'));
     }
 
     /**
