@@ -19,9 +19,7 @@
                         <th style="width: 10px">No</th>
                         <th>NIM/NISN</th>
                         <th>Nama Lengkap</th>
-                        <th>Jurusan</th>
                         <th>Asal Institusi</th>
-                        <th>Alamat</th>
                         <th style="width: 200px">Aksi</th>
                     </tr>
                 </thead>
@@ -31,9 +29,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $s->student_number }}</td>
                             <td>{{ $s->user->name }}</td>
-                            <td>{{ $s->major }}</td>
                             <td>{{ $s->institution }}</td>
-                            <td>{{ $s->address }}</td>
                             <td>
                                 {{-- Button Detail --}}
                                 <a href="{{ route('students.show', $s->id) }}" class="btn btn-md btn-info"><i
