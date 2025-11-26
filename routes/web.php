@@ -27,6 +27,10 @@ Route::middleware('auth')->group(function(){
     Route::resource('students', StudentController::class);
     Route::resource('divisions', DivisionController::class);
     Route::resource('mentors', MentorController::class);
+
+    Route::put('interns/process/{intern}', [App\Http\Controllers\InternController::class, 'process'])->name('interns.process');
+    Route::put('interns/accept/{intern}', [App\Http\Controllers\InternController::class, 'accept'])->name('interns.accept');
+    Route::put('interns/denied/{intern}', [App\Http\Controllers\InternController::class, 'denied'])->name('interns.denied');
     Route::resource('interns', InternController::class);
     Route::resource('scores', ScoreController::class);
     Route::resource('score-values', ScoreValueController::class);
