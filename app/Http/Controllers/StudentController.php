@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\User;
+use App\Models\Intern;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\StudentRequest;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -12,8 +17,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $data = Student::orderby('created_at', 'desc')->paginate(5);
-        return view('student.index', compact('data'));
+        $students = Student::with('user')->paginate(10);
+        return view('student.index', compact('students'));
     }
 
     /**
@@ -21,16 +26,43 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('student.create');
+        $students = Student::all();
+        return view('student.create', compact('students'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
-        return redirect()->route('students.index')
-        ->with('success', 'Student created successfully.');
+        try {
+            $form = $request->validated();
+            DB::transaction(function() use ($form){
+                $user = User::create([
+                    'name' => $form['name'],
+                    'uuid' => Str::uuid(),
+                    'email_verified_at' => now(),
+                    'email' => $form['email'],
+                    'password' => bcrypt($form['password'])
+                ]);
+                Student::create([
+                    'user_id' => $user->id,
+                    'student_number' => $form['student_number'],
+                    'institution' => $form['institution'],
+                    'major' => $form['major'],
+                    'phone' => $form['phone'],
+                    'address' => $form['address'],
+                ]);
+
+                $user->assignRole('student');
+            });
+            return redirect()->route('students.index')->with('success','Berhasil Menambahkan Student');
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->back()->with('error',$th->getMessage);
+        }
+
     }
 
     /**
@@ -46,17 +78,47 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        return view('student.edit', compact('student'));
+        $students = Student::all();
+        return view('student.edit', compact('intern','student'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function update(StudentRequest $request, Student $student)
     {
-        $student->update($request->validated());
-        return redirect()->route('students.index')
-        ->with('success', 'Student updated successfully.');
+        try {
+            $form = $request->validated();
+
+            DB::transaction(function() use ($form, $student){
+
+                $user = User::findOrFail($student->user_id);
+                $user->update([
+                    'name' => $form['name'],
+                    'email' => $form['email'],
+                    'password' => !empty($form['password'])
+                        ? bcrypt($form['password'])
+                        : $user->password,
+                ]);
+
+                $student->update([
+                    'student_number' => $form['student_number'],
+                    'institution' => $form['institution'],
+                    'major' => $form['major'],
+                    'phone' => $form['phone'],
+                    'address' => $form['address'],
+                ]);
+
+                $user->syncRoles(['student']);
+            });
+
+            return redirect()->route('students.index')->with('success','Berhasil Mengupdate Student');
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->back()->with('error',$th->getMessage);
+        }
+
     }
 
     /**
@@ -64,7 +126,12 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        $student->delete();
-        return back()->with('success','Student deleted successfully.');
+        try {
+            User::find($student->user_id)->delete();
+            return redirect()->back()->with('success','Berhasil Menghapus Student');
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->back()->with('error',$th->getMessage);
+        }
     }
 }
