@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ProfileController;
@@ -8,15 +9,32 @@ use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ScoreController;
+use App\Http\Controllers\ScoreValueController;
+use App\Http\Controllers\InternController;
+use App\Http\Controllers\LogbookController;
+use App\Http\Controllers\LogbookImageController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('welcome')->middleware('guest');
+})->name('welcome');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $role = Auth::user()->getRoleNames()->first();
+    if ($role == 'admin') {
+        return redirect()->route('dashboard.admin');
+    } elseif ($role == 'mentor') {
+        return redirect()->route('dashboard.mentor');
+    } elseif ($role == 'student') {
+        return redirect()->route('dashboard.student');
+    }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::prefix('dashboard')->group(function () {
+    Route::get('/admin',[DashboardController::class,'admin'])->name('dashboard.admin');
+    Route::get('/mentor',[DashboardController::class,'mentor'])->name('dashboard.mentor');
+    Route::get('/student',[DashboardController::class,'student'])->name('dashboard.student');
+})->middleware(['auth', 'verified']);
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -28,12 +46,14 @@ Route::middleware('auth')->group(function(){
     Route::resource('divisions', DivisionController::class);
     Route::resource('mentors', MentorController::class);
 
-    Route::put('interns/process/{intern}', [App\Http\Controllers\InternController::class, 'process'])->name('interns.process');
-    Route::put('interns/accept/{intern}', [App\Http\Controllers\InternController::class, 'accept'])->name('interns.accept');
-    Route::put('interns/denied/{intern}', [App\Http\Controllers\InternController::class, 'denied'])->name('interns.denied');
+    Route::put('interns/process/{intern}', [InternController::class, 'process'])->name('interns.process');
+    Route::put('interns/accept/{intern}', [InternController::class, 'accept'])->name('interns.accept');
+    Route::put('interns/denied/{intern}', [InternController::class, 'denied'])->name('interns.denied');
     Route::resource('interns', InternController::class);
+    Route::resource('interns.score-values', ScoreValueController::class);
+    Route::resource('interns.logbook', LogbookController::class);
+    Route::resource('interns.logbooks.images',LogbookImageController::class);
     Route::resource('scores', ScoreController::class);
-    Route::resource('score-values', ScoreValueController::class);
     
     Route::resource('roles',RoleController::class)->only([
         'index', 'store','update','destroy'

@@ -40,8 +40,13 @@
 
         <!-- Tombol -->
         <div class="d-flex gap-3">
-            <a href="{{ route('login') }}" class="btn btn-primary px-4">Login</a>
-            <a href="{{ route('register') }}" class="btn btn-outline-dark px-4">Register</a>
+            @auth
+                <a href="{{ route('dashboard') }}" class="btn btn-primary px-4">Dashboard</a>
+            @endauth
+            @guest
+                <a href="{{ route('login') }}" class="btn btn-primary px-4">Login</a>
+                <a href="{{ route('register') }}" class="btn btn-outline-dark px-4">Register</a>
+            @endguest
         </div>
 
     </div>

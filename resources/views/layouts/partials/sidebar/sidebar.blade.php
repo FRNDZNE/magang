@@ -23,13 +23,15 @@
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation"
                 aria-label="Main navigation" data-accordion="false" id="navigation">
                 <li class="nav-item">
-                    <a href="{{ route('dashboard') }}" class="nav-link {{ Route::is('dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard') }}"
+                        class="nav-link {{ Route::is('dashboard.' . strtolower(Auth::user()->getRoleNames()->first())) ? 'active' : '' }}">
                         <i class="nav-icon bi bi-speedometer2"></i>
                         <p>
                             Dashboard
                         </p>
                     </a>
                 </li>
+                @include('layouts.partials.sidebar.' . strtolower(Auth::user()->getRoleNames()->first()))
                 <li class="nav-header">Divisi</li>
                 <li class="nav-item">
                     <a href="{{ route('divisions.index') }}"

@@ -67,7 +67,7 @@
                     <div class="input-group mb-3">
                         <input type="email"
                             class="form-control @error('email') is-invalid @else @if (old('email')) is-valid @endif @enderror"
-                            name="email" placeholder="Email" />
+                            name="email" placeholder="Email" value="{{ old('email') }}" />
                         <div class="input-group-text"><span class="bi bi-envelope"></span></div>
                         @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>

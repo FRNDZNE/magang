@@ -16,6 +16,6 @@ class Student extends Model
 
     public function intern()
     {
-        return $this->hasMany(Intern::class); 
+        return $this->hasOne(Intern::class); 
     }
 }
