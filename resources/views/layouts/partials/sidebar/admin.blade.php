@@ -1,2 +1,42 @@
 @role('admin')
+    <li class="nav-header">Divisi</li>
+    <li class="nav-item">
+        <a href="{{ route('divisions.index') }}" class="nav-link {{ Route::is('divisions.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-diagram-3"></i>
+            <p>Divisi</p>
+        </a>
+    </li>
+    <li class="nav-header">Penilaian</li>
+    <li class="nav-item">
+        <a href="{{ route('scores.index') }}" class="nav-link {{ Route::is('scores.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-clipboard-check"></i>
+            <p>Penilaian</p>
+        </a>
+    </li>
+    <li class="nav-header">Role & Permission</li>
+    <li class="nav-item">
+        <a href="{{ route('roles.index') }}" class="nav-link {{ Route::is('roles.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-journal-text"></i>
+            <p>Role</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('permissions.index') }}" class="nav-link {{ Route::is('permissions.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-calendar-check"></i>
+            <p>Permission</p>
+        </a>
+    </li>
+    <div class="nav-header">User</div>
+    <li class="nav-item">
+        <a href="{{ route('mentors.index') }}" class="nav-link {{ Route::is('mentors.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-person-badge"></i>
+            <p>Mentor</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('students.index') }}" class="nav-link {{ Route::is('students.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-people"></i>
+            <p>Student</p>
+        </a>
+    </li>
 @endrole
