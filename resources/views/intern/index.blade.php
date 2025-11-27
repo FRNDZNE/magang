@@ -56,7 +56,7 @@
                     @endforeach
                 @endrole
                 @role('student')
-                    @if ($data->intern == null)
+                    @if ($intern == 0)
                         <tr>
                             <td colspan="4" class="text-center">Tidak ada data magang.</td>
                         </tr>

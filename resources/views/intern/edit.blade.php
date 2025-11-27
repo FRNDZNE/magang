@@ -26,8 +26,6 @@
                             </select>
                             @error('division_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
-                            @elseif(old('division_id'))
-                                <div class="valid-feedback">Sudah dipilih</div>
                             @enderror
                         </div>
                     </div>
