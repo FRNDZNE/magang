@@ -7,7 +7,7 @@ use App\Models\Division;
 use App\Models\Mentor;
 use App\Models\Student;
 use App\Models\Intern;
-
+use Auth;
 class DashboardController extends Controller
 {
     public function admin()
@@ -25,7 +25,9 @@ class DashboardController extends Controller
 
     public function mentor()
     {
-        return view('dashboard.mentor');
+        $mentor_id = Auth::user()->mentor->id;
+        $data['mentee'] = Intern::where('mentor_id',$mentor_id)->count();    
+        return view('dashboard.mentor',compact('data'));
     }
 
     public function student()

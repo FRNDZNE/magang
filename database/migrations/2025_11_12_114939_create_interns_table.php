@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('interns', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('student_id')->constrained()->onDelete('cascade');
+            $table->foreignId('division_id')->constrained()->onDelete('cascade');
             $table->foreignId('mentor_id')->nullable()->constrained()->onDelete('cascade');
             $table->date('start_date');
             $table->date('end_date');

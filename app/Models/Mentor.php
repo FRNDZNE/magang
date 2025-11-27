@@ -17,4 +17,9 @@ class Mentor extends Model
     {
         return $this->belongsTo(Division::class);
     }
+
+    public function interns()
+    {
+        return $this->hasMany(Intern::class);
+    }
 }

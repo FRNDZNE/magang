@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Models\Intern;
+use App\Models\Division;
 use Illuminate\Http\Request;
+use App\Http\Requests\InternRequestForStudent;
 
 class InternController extends Controller
 {
@@ -12,26 +15,36 @@ class InternController extends Controller
      */
     public function index()
     {
-        $data = Intern::orderby('created_at', 'desc')->paginate(5);
+        $user = Auth::user();
+        $role = $user->getRoleNames()->first();
+        if ($role == 'student') {
+            $student_id = $user->student->id;
+            $data = Intern::where('student_id', $student_id)->first();
+        } else {
+            $data = Intern::paginate(10);
+        }
         return view('intern.index', compact('data'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource for student.
      */
     public function create()
     {
-        return view('intern.create');
+        $divisions = Division::all();
+        return view('intern.create',compact('divisions'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(InternRequestForStudent $request)
     {
-        Intern::create($request->validated());
+        $req = $request->validated();
+        return $req;
+        Intern::create($req);
         return redirect()->route('interns.index')
-        ->with('success', 'Intern created successfully.');
+        ->with('success', 'Pengajuan magang berhasil dikirim.');
     }
 
     /**
@@ -47,7 +60,8 @@ class InternController extends Controller
      */
     public function edit(Intern $intern)
     {
-        return view('intern.edit', compact('intern'));
+        $divisions = Division::all();
+        return view('intern.edit', compact('intern','divisions'));
     }
 
     /**

@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
             'user_id' => $user->id,
             'division_id' => 1,
             'employee_number' => 'EMP123456',
-            'phone' => '081234567890',
+            'phone' => '6285157267750',
         ]);
 
         $user->assignRole('mentor');
@@ -61,7 +61,7 @@ class UserSeeder extends Seeder
             'student_number' => 'STU123456',
             'institution' => 'Universitas Contoh',
             'major' => 'Teknik Informatika',
-            'phone' => '089876543210',
+            'phone' => '6285157267750',
             'address' => 'Jl. Contoh No. 123, Kota Contoh',
         ]);
 

@@ -1,7 +1,7 @@
 @role('student')
     <li class="nav-header">Magang</li>
     <li class="nav-item">
-        <a href="./docs/introduction.html" class="nav-link">
+        <a href="{{ route('interns.index') }}" class="nav-link {{ Route::is('interns.*') ? 'active' : '' }}">
             <i class="nav-icon bi bi-file-earmark-plus"></i>
             <p>Pengajuan Magang</p>
         </a>
