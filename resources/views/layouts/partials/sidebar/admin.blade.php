@@ -1,4 +1,11 @@
 @role('admin')
+    <li class="nav-header">Magang</li>
+    <li class="nav-item">
+        <a href="{{ route('interns.index') }}" class="nav-link {{ Route::is('interns.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-file-earmark-plus"></i>
+            <p>Pengajuan Magang</p>
+        </a>
+    </li>
     <li class="nav-header">Divisi</li>
     <li class="nav-item">
         <a href="{{ route('divisions.index') }}" class="nav-link {{ Route::is('divisions.*') ? 'active' : '' }}">

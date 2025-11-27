@@ -13,29 +13,57 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="division">Divisi Tujuan</label>
-                            <select name="" id="" class="form-control">
-                                <option value="">-- Pilih Divisi --</option>
+                            <label for="division">Divisi</label>
+                            <select name="division_id" id="division"
+                                class="form-control @error('division_id') is-invalid @elseif(old('division_id')) is-valid @enderror">
+                                <option value="">Pilih Divisi</option>
                                 @foreach ($divisions as $d)
-                                    <option value="{{ $d->id }}">{{ $d->name }}</option>
+                                    <option value="{{ $d->id }}"
+                                        {{ old('division_id') == $d->id ? 'selected' : '' }}>
+                                        {{ $d->name }}
+                                    </option>
                                 @endforeach
                             </select>
+                            @error('division_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @elseif(old('division_id'))
+                                <div class="valid-feedback">Sudah dipilih</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="start_date" class="form-label">Tanggal Mulai</label>
-                            <input type="date" class="form-control" id="start_date" name="start_date">
+                        <div class="form-group">
+                            <label for="start_date">Tanggal Mulai</label>
+                            <input type="date" name="start_date" id="start_date"
+                                class="form-control @error('start_date') is-invalid @else @if (old('start_date')) is-valid @endif @enderror"
+                                value="{{ old('start_date') }}">
+                            @error('start_date')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @else
+                                @if (old('start_date'))
+                                    <div class="valid-feedback">Valid</div>
+                                @endif
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="end_date" class="form-label">Tanggal Selesai</label>
-                            <input type="date" class="form-control" id="end_date" name="end_date">
+                        <div class="form-group">
+                            <label for="end_date">Tanggal Selesai</label>
+                            <input type="date" name="end_date" id="end_date"
+                                class="form-control @error('end_date') is-invalid @else @if (old('end_date')) is-valid @endif @enderror"
+                                value="{{ old('end_date') }}">
+                            @error('end_date')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @else
+                                @if (old('end_date'))
+                                    <div class="valid-feedback">Valid</div>
+                                @endif
+                            @enderror
                         </div>
                     </div>
+
                 </div>
             </div>
             <div class="card-footer">

@@ -9,12 +9,15 @@
         </div>
         <div class="card-body">
             @role('student')
-                <a href="{{ route('interns.create') }}" class="btn btn-primary mb-3">
+                @php
+                    $intern = Auth::user()->student->intern->count();
+                @endphp
+                <a href="{{ route('interns.create') }}"
+                    class="btn btn-primary mb-3 @if ($intern >= 1) d-none @endif">
                     <i class="bi bi-plus-lg"></i> Ajukan Magang
                 </a>
+                <hr>
             @endrole
-
-            <hr>
             <table class="table table-bordered">
                 @role('admin')
                     <thead>
@@ -37,8 +40,33 @@
                     </thead>
                 @endrole
                 @role('admin')
+                    @foreach ($data as $d)
+                        <tbody>
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $d->student->user->name }}</td>
+                                <td>{{ $d->student->institution }}</td>
+                                <td>
+                                    <a href="{{ route('interns.show', $d->uuid) }}" class="btn btn-info btn-sm">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    @endforeach
+                @endrole
+                @role('student')
                     <tbody>
-
+                        <tr>
+                            <td>1</td>
+                            <td>{{ $data->start_date }}</td>
+                            <td>{{ $data->end_date }}</td>
+                            <td>
+                                <a href="{{ route('interns.show', $data->uuid) }}" class="btn btn-info btn-sm">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
                     </tbody>
                 @endrole
             </table>

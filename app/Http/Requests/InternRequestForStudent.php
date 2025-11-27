@@ -22,9 +22,9 @@ class InternRequestForStudent extends FormRequest
     public function rules(): array
     {
         return [
-            'division' => 'required',
-            'start_date' => 'requested|date',
-            'end_date' => 'requested|date|after_or_equal:start_date',
+            'division_id' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
         ];
     }
 

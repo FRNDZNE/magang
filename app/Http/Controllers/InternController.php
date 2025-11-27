@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\Intern;
 use App\Models\Division;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\InternRequestForStudent;
 
@@ -40,11 +41,15 @@ class InternController extends Controller
      */
     public function store(InternRequestForStudent $request)
     {
-        $req = $request->validated();
-        return $req;
-        Intern::create($req);
-        return redirect()->route('interns.index')
-        ->with('success', 'Pengajuan magang berhasil dikirim.');
+        $data = $request->validated();
+        Intern::create([
+            'uuid' => Str::uuid(),
+            'student_id' => Auth::user()->student->id,
+            'division_id' => $data['division_id'],
+            'start_date' => $data['start_date'],
+            'end_date' => $data['end_date'],
+        ]);
+        return redirect()->route('dashboard')->with('success', 'Pengajuan magang berhasil dikirim.');
     }
 
     /**
@@ -67,11 +72,11 @@ class InternController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Intern $intern)
+    public function update(InternRequestForStudent $request, Intern $intern)
     {
         $intern->update($request->validated());
         return redirect()->route('interns.index')
-        ->with('success', 'Intern updated successfully.');
+        ->with('success', 'Pengajuan magang berhasil diperbarui.');
     }
 
     /**
@@ -79,7 +84,7 @@ class InternController extends Controller
      */
     public function destroy(Intern $intern)
     {
-        $intern->delete();
+        
         return back()->with('success','Intern deleted successfully.');
     }
 }
