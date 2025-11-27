@@ -10,7 +10,7 @@
         <div class="card-body">
             @role('student')
                 @php
-                    $intern = Auth::user()->student->intern->count();
+                    $intern = Auth::user()->student->intern ? Auth::user()->student->intern->count() : 0;
                 @endphp
                 <a href="{{ route('interns.create') }}"
                     class="btn btn-primary mb-3 @if ($intern >= 1) d-none @endif">
@@ -56,18 +56,25 @@
                     @endforeach
                 @endrole
                 @role('student')
-                    <tbody>
+                    @if ($data->intern == null)
                         <tr>
-                            <td>1</td>
-                            <td>{{ $data->start_date }}</td>
-                            <td>{{ $data->end_date }}</td>
-                            <td>
-                                <a href="{{ route('interns.show', $data->uuid) }}" class="btn btn-info btn-sm">
-                                    <i class="bi bi-eye"></i>
-                                </a>
-                            </td>
+                            <td colspan="4" class="text-center">Tidak ada data magang.</td>
                         </tr>
-                    </tbody>
+                    @else
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>{{ $data->start_date }}</td>
+                                <td>{{ $data->end_date }}</td>
+                                <td>
+                                    <a href="{{ route('interns.show', $data->uuid) }}" class="btn btn-info btn-sm">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    @endif
+
                 @endrole
             </table>
         </div>

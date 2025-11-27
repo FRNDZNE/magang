@@ -19,7 +19,7 @@
                                 <option value="">Pilih Divisi</option>
                                 @foreach ($divisions as $d)
                                     <option value="{{ $d->id }}"
-                                        {{ old('division_id') == $d->id ? 'selected' : '' }}>
+                                        {{ $intern->division_id == $d->id ? 'selected' : '' }}>
                                         {{ $d->name }}
                                     </option>
                                 @endforeach
@@ -38,13 +38,9 @@
                             <label for="start_date">Tanggal Mulai</label>
                             <input type="date" name="start_date" id="start_date"
                                 class="form-control @error('start_date') is-invalid @else @if (old('start_date')) is-valid @endif @enderror"
-                                value="{{ old('start_date') }}">
+                                value="{{ $intern->start_date }}">
                             @error('start_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
-                            @else
-                                @if (old('start_date'))
-                                    <div class="valid-feedback">Valid</div>
-                                @endif
                             @enderror
                         </div>
                     </div>
@@ -53,13 +49,9 @@
                             <label for="end_date">Tanggal Selesai</label>
                             <input type="date" name="end_date" id="end_date"
                                 class="form-control @error('end_date') is-invalid @else @if (old('end_date')) is-valid @endif @enderror"
-                                value="{{ old('end_date') }}">
+                                value="{{ $intern->end_date }}">
                             @error('end_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
-                            @else
-                                @if (old('end_date'))
-                                    <div class="valid-feedback">Valid</div>
-                                @endif
                             @enderror
                         </div>
                     </div>
