@@ -91,23 +91,25 @@ class MentorController extends Controller
     {
         try {
             $form = $request->validated();
+
             DB::transaction(function () use ($form, $mentor) {
+
                 // Update user
                 $mentor->update([
                     'name' => $form['name'],
                     'email' => $form['email'],
-                    // Update password hanya jika diisi
-                    'password' => $form['password'] ? bcrypt($form['password']) : $mentor->password,
+                    'password' => !empty($form['password'])
+                        ? bcrypt($form['password'])
+                        : $mentor->password,
                 ]);
 
-                // Update mentor detail
+                // Update mentor table via relasi
                 $mentor->mentor->update([
                     'division_id'     => $form['division_id'],
                     'employee_number' => $form['employee_number'],
                     'phone'           => $form['phone'],
                 ]);
 
-                // Role tetap
                 $mentor->syncRoles(['mentor']);
             });
 

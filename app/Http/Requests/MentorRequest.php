@@ -16,17 +16,17 @@ class MentorRequest extends FormRequest
     {
         return [
             'name' => ['required'],
-            
+
             // email berada di tabel users
             'email' => [
                 'required',
                 'email',
-                Rule::unique('users', 'email')->ignore($this->mentor?->user_id), 
+                Rule::unique('users', 'email')->ignore($this->mentor?->uuid, 'uuid'),
                 // abaikan user dengan email yang sama jika sedang mengedit
             ],
 
             'password' => [
-                $this->mentor ? 'nullable' : 'required', 
+                $this->mentor ? 'nullable' : 'required',
                 // saat edit password boleh kosong
             ],
 
