@@ -56,7 +56,7 @@ class MentorController extends Controller
         }
     }
 
-    /** 
+    /**
      * SHOW → menggunakan User binding (UUID)
      */
     public function show(User $mentor)
@@ -92,24 +92,31 @@ class MentorController extends Controller
         try {
             $form = $request->validated();
 
-            DB::transaction(function () use ($form, $mentor) {
+            DB::transaction(function () use (&$form, $mentor) {
+
+                // Hilangkan email jika tidak diubah
+                if ($form['email'] === $mentor->email) {
+                    unset($form['email']);
+                }
+
+                // Hilangkan password jika kosong
+                if (empty($form['password'])) {
+                    unset($form['password']);
+                } else {
+                    $form['password'] = bcrypt($form['password']);
+                }
 
                 // Update user
-                $mentor->update([
-                    'name' => $form['name'],
-                    'email' => $form['email'],
-                    'password' => !empty($form['password'])
-                        ? bcrypt($form['password'])
-                        : $mentor->password,
-                ]);
+                $mentor->update($form);
 
-                // Update mentor table via relasi
+                // Update mentor detail
                 $mentor->mentor->update([
                     'division_id'     => $form['division_id'],
                     'employee_number' => $form['employee_number'],
                     'phone'           => $form['phone'],
                 ]);
 
+                // Role tetap
                 $mentor->syncRoles(['mentor']);
             });
 
@@ -118,6 +125,7 @@ class MentorController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());
         }
+
     }
 
     /**
