@@ -91,23 +91,14 @@ class MentorController extends Controller
     {
         try {
             $form = $request->validated();
-
-            DB::transaction(function () use (&$form, $mentor) {
-
-                // Hilangkan email jika tidak diubah
-                if ($form['email'] === $mentor->email) {
-                    unset($form['email']);
-                }
-
-                // Hilangkan password jika kosong
-                if (empty($form['password'])) {
-                    unset($form['password']);
-                } else {
-                    $form['password'] = bcrypt($form['password']);
-                }
-
+            DB::transaction(function () use ($form, $mentor) {
                 // Update user
-                $mentor->update($form);
+                $mentor->update([
+                    'name' => $form['name'],
+                    'email' => $form['email'],
+                    // Update password hanya jika diisi
+                    'password' => $form['password'] ? bcrypt($form['password']) : $mentor->password,
+                ]);
 
                 // Update mentor detail
                 $mentor->mentor->update([
