@@ -46,11 +46,11 @@ Route::middleware('auth')->group(function(){
     Route::resource('divisions', DivisionController::class);
     Route::resource('mentors', MentorController::class);
 
-    Route::put('interns/process/{intern}', [InternController::class, 'process'])->name('interns.process');
-    Route::put('interns/accept/{intern}', [InternController::class, 'accept'])->name('interns.accept');
-    Route::put('interns/denied/{intern}', [InternController::class, 'denied'])->name('interns.denied');
     Route::get('interns/history',[InternController::class,'history'])->name('interns.history');
     Route::get('interns/history/{student}',[InternController::class,'history_student'])->name('interns.history.student');
+    Route::put('interns/{intern}/process', [InternController::class, 'process'])->name('interns.process');
+    Route::put('interns/{intern}/accept', [InternController::class, 'accept'])->name('interns.accept');
+    Route::put('interns/{intern}/denied', [InternController::class, 'denied'])->name('interns.denied');
     Route::resource('interns', InternController::class);
     Route::resource('interns.score-values', ScoreValueController::class);
     Route::resource('interns.logbook', LogbookController::class);

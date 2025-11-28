@@ -114,7 +114,7 @@ class InternController extends Controller
     public function process(Intern $intern)
     {
         $intern->update(['status' => 'p']);
-        return back()->with('success','Intern is now in process.');
+        return redirect()->back()->with('success','Pengajuan berhasil diproses.');
     }
 
     public function accept(Intern $intern)

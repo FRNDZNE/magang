@@ -24,7 +24,7 @@
         <div class="col-md-3">
             <div class="info-box">
                 <span class="info-box-icon text-bg-primary shadow-sm">
-                    <i class="bi bi-card-checklist"></i>
+                    <i class="bi bi-hourglass-split"></i>
                 </span>
                 <div class="info-box-content">
                     <span class="info-box-text">Pengajuan Terkonfirmasi</span>

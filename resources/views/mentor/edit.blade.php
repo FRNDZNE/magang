@@ -9,7 +9,7 @@
         <div class="card-header">
             <h3 class="card-title">Form Edit Mentor</h3>
         </div>
-        <form action="{{ route('mentors.update', $mentor->id) }}" method="post">
+        <form action="{{ route('mentors.update', $mentor->uuid) }}" method="post">
             @csrf
             @method('PUT')
             <div class="card-body">

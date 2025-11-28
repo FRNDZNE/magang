@@ -2,26 +2,89 @@
 @section('title', 'Pengajuan Magang')
 @section('role', ucfirst(Auth::user()->getRoleNames()->first()))
 @section('breadcrumb')
-    <li class="breadcrumb-item active">Detail Magang</li>
+    <li class="breadcrumb-item active">Detail Pengajuan Magang</li>
 @endsection
 @section('content')
     <a href="{{ route('interns.index') }}" class="btn btn-md btn-secondary">Kembali</a>
     <hr>
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title"></h3>
+            <h3 class="card-title">{{ $intern->student->user->name }}</h3>
         </div>
         <div class="card-body">
-
+            <div class="row">
+                <div class="col-12">
+                    <p><strong>Nama:</strong> {{ $intern->student->institution }}</p>
+                    <p><strong>Divisi yang Dituju:</strong> {{ $intern->division->name }}</p>
+                    <p><strong>Tanggal Mulai Magang:</strong> {{ $intern->start_date }}</p>
+                    <p><strong>Tanggal Selesai Magang:</strong> {{ $intern->end_date }}</p>
+                    <p><strong>Status Pengajuan:</strong>
+                        @if ($intern->status == 'c')
+                            @if ($intern->deleted_at)
+                                <span class="badge bg-secondary">Dibatalkan</span>
+                            @else
+                                <span class="badge bg-primary">Terkonfirmasi</span>
+                            @endif
+                        @elseif($intern->status == 'p')
+                            <span class="badge bg-warning">Dalam Proses</span>
+                        @elseif($intern->status == 'a')
+                            <span class="badge bg-success">Diterima</span>
+                        @elseif($intern->status == 'd')
+                            <span class="badge bg-danger">Ditolak</span>
+                        @endif
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select name="" id="" class="form-control"></select>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <hr>
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Daftar Anak Bimbingan</h3>
-        </div>
-        <div class="card-body">
+        <div class="card-footer">
+            @if ($intern->status == 'c')
+                <!-- Modal trigger button -->
+                <button type="button" class="btn btn-warning btn-md" data-bs-toggle="modal" data-bs-target="#modalId">
+                    Proses
+                </button>
 
+                <!-- Modal Body -->
+                <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+                <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                    role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalTitleId">
+                                    Modal title
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    Apakah anda yakin ingin memproses pengajuan magang
+                                    <strong>{{ $intern->student->user->name }}</strong>?
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <form action="{{ route('interns.process', $intern->uuid) }}" method="post">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" class="btn btn-md btn-warning">Proses</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            @if ($intern->status == 'p')
+            @endif
         </div>
     </div>
 @endsection
