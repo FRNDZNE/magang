@@ -93,7 +93,6 @@ class MentorController extends Controller
             $form = $request->validated();
 
             DB::transaction(function () use ($form, $mentor) {
-
                 // Update user
                 $mentor->update([
                     'name' => $form['name'],

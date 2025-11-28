@@ -9,7 +9,7 @@
         <div class="card-header">
             <h3 class="card-title">Form Edit Student</h3>
         </div>
-        <form action="{{ route('students.update', $student->id) }}" method="post">
+        <form action="{{ route('students.update', $student->uuid) }}" method="post">
             @csrf
             @method('PUT')
             <div class="card-body">
@@ -19,7 +19,7 @@
                             <label for="student_number">NIM/NISN</label>
                             <input type="text" name="student_number" id="student_number"
                                 class="form-control @error('student_number') is-invalid @else @if (old('student_number')) is-valid @endif @enderror"
-                                value="{{ $student->student_number }}">
+                                value="{{ $student->student->student_number }}">
                             @error('student_number')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @else
@@ -34,7 +34,7 @@
                             <label for="major">Jurusan</label>
                             <input type="text" name="major" id="major"
                                 class="form-control @error('major') is-invalid @else @if (old('major')) is-valid @endif @enderror"
-                                value="{{ $student->major }}">
+                                value="{{ $student->student->major }}">
                             @error('major')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @else
@@ -50,7 +50,7 @@
                             <label for="institution">Institusi</label>
                             <input type="text" name="institution" id="institution"
                                 class="form-control @error('institution') is-invalid @else @if (old('institution')) is-valid @endif @enderror"
-                                value="{{ $student->institution }}">
+                                value="{{ $student->student->institution }}">
                             @error('institution')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @else
@@ -67,7 +67,7 @@
                             <label for="name">Nama Lengkap</label>
                             <input type="text" name="name" id="name"
                                 class="form-control @error('name') is-invalid @else @if (old('name')) is-valid @endif @enderror"
-                                value="{{ $student->user->name }}">
+                                value="{{ $student->name }}">
                             @error('name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @else
@@ -82,7 +82,7 @@
                             <label for="phone">Nomor Telepon</label>
                             <input type="text" name="phone" id="phone"
                                 class="form-control @error('phone') is-invalid @else @if (old('phone')) is-valid @endif @enderror"
-                                value="{{ $student->phone }}">
+                                value="{{ $student->student->phone }}">
                             @error('phone')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @else
@@ -99,13 +99,9 @@
                             <label for="email">E-Mail</label>
                             <input type="email" name="email" id="email"
                                 class="form-control @error('email') is-invalid @else @if (old('email')) is-valid @endif @enderror"
-                                value="{{ $student->user->email }}">
+                                value="{{ $student->email }}">
                             @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
-                            @else
-                                @if (old('email'))
-                                    <div class="valid-feedback">Valid</div>
-                                @endif
                             @enderror
                         </div>
                     </div>
@@ -131,7 +127,7 @@
                         <div class="form-group">
                             <label for="address">Alamat</label>
                             <textarea name="address" id="address" rows="5"
-                                class="form-control @error('address') is-invalid @else @if (old('address')) is-valid @endif @enderror">{{ old('address', $student->address) }}</textarea>
+                                class="form-control @error('address') is-invalid @else @if (old('address')) is-valid @endif @enderror">{{ old('address', $student->student->address) }}</textarea>
 
                             @error('address')
                                 <div class="invalid-feedback">{{ $message }}</div>
