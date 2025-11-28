@@ -15,7 +15,7 @@ class DashboardController extends Controller
         $data['division'] = Division::count();
         $data['mentor'] = Mentor::count();
         $data['student'] = Student::count();
-        $data['total_pengajuan'] = Intern::withTrashed()->count();
+        $data['total_pengajuan'] = Intern::withTrashed()->whereNull('deleted_at')->count();
         $data['terkonfirmasi'] = Intern::where('status','c')->count();
         $data['process'] = Intern::where('status','p')->count();
         $data['accepted'] = Intern::where('status','a')->count();
