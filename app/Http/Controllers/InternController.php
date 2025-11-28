@@ -33,9 +33,13 @@ class InternController extends Controller
         return view('intern.history', compact('data'));
     }
 
-    public function history_student($student_id)
+    public function history_student($uuid)
     {
-        $data = Intern::withTrashed()->where('student_id',$student_id)->orderBy('created_at','desc')->get();
+        $data = Intern::withTrashed()->whereHas('student', function($q) use ($uuid) {
+            $q->whereHas('user', function($q2) use ($uuid) {
+                $q2->where('uuid', $uuid);
+            });
+        })->orderBy('created_at','desc')->get();
         return view('intern.history-student', compact('data'));
     }
 

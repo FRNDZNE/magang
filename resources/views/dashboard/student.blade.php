@@ -12,7 +12,7 @@
                 <div class="info-box-content">
                     <span class="info-box-text">Jumlah Pengajuan</span>
                     <span class="info-box-number">
-                        0
+                        {{ $data['pengajuan'] }}
                         <small>Pengajuan</small>
                     </span>
                 </div>
@@ -29,7 +29,7 @@
                 <div class="info-box-content">
                     <span class="info-box-text">Pengajuan Terkonfirmasi</span>
                     <span class="info-box-number">
-                        0
+                        {{ $data['terkonfirmasi'] }}
                         <small>Pengajuan</small>
                     </span>
                 </div>
@@ -44,8 +44,8 @@
                 <div class="info-box-content">
                     <span class="info-box-text">Pengajuan diproses</span>
                     <span class="info-box-number">
-                        0
-                        <small>Orang</small>
+                        {{ $data['process'] }}
+                        <small>Pengajuan</small>
                     </span>
                 </div>
                 <!-- /.info-box-content -->
@@ -59,8 +59,8 @@
                 <div class="info-box-content">
                     <span class="info-box-text">Pengjauan Diterima</span>
                     <span class="info-box-number">
-                        0
-                        <small>Orang</small>
+                        {{ $data['accepted'] }}
+                        <small>Pengajuan</small>
                     </span>
                 </div>
                 <!-- /.info-box-content -->
@@ -74,8 +74,8 @@
                 <div class="info-box-content">
                     <span class="info-box-text">Pengajuan Ditolak</span>
                     <span class="info-box-number">
-                        0
-                        <small>Orang</small>
+                        {{ $data['denied'] }}
+                        <small>Pengajuan</small>
                     </span>
                 </div>
                 <!-- /.info-box-content -->
@@ -89,10 +89,12 @@
                     <h3 class="card-title">Detail Magang</h3>
                 </div>
                 <div class="card-body">
-                    <p><b>Divisi Tujuan :</b> </p>
-                    <p><b>Mentor :</b> </p>
-                    <p><b>Nomor Pegawai :</b> </p>
-                    <p><b>Kontak :</b> <a href="">Nomor Mentor Disini</a></p>
+                    <p><b>Divisi Tujuan :</b> {{ $data['internship']->division->name }}</p>
+                    <p><b>Mentor :</b> {{ $data['internship']->mentor->name ?? 'Belum Ditentukan' }}</p>
+                    <p><b>Nomor Pegawai :</b> {{ $data['internship']->mentor->employee_number ?? 'Belum Ditentukan' }}</p>
+                    <p><b>Kontak :</b> <a
+                            href="https://wa.me/{{ $data['internship']->mentor->phone ?? 'Belum Ditentukan' }}">{{ $data['internship']->mentor->phone ?? 'Belum Ditentukan' }}</a>
+                    </p>
                 </div>
             </div>
         </div>

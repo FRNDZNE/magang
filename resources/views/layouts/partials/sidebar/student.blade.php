@@ -1,14 +1,16 @@
 @role('student')
     <li class="nav-header">Magang</li>
     <li class="nav-item">
-        <a href="{{ route('interns.index') }}" class="nav-link {{ Route::is('interns.*') ? 'active' : '' }}">
+        <a href="{{ route('interns.index') }}"
+            class="nav-link {{ Route::is('interns.index') || (Route::is('interns.*') && !Route::is('interns.history.*')) ? 'active' : '' }}">
             <i class="nav-icon bi bi-file-earmark-plus"></i>
             <p>Pengajuan Magang</p>
         </a>
     </li>
     <li class="nav-item">
-        <a href="{{ route('interns.history') }}" class="nav-link {{ Route::is('interns.history') ? 'active' : '' }}">
-            <i class="bi bi-clock-history"></i>
+        <a href="{{ route('interns.history.student', Auth::user()->uuid) }}"
+            class="nav-link {{ Route::is('interns.history.student') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-clock-history"></i>
             <p>History Pengajuan</p>
         </a>
     </li>

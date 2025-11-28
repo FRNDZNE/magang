@@ -25,6 +25,7 @@
                             <th>No</th>
                             <th>Nama</th>
                             <th>Asal Institusi</th>
+                            <th>Divisi Tujuan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -47,6 +48,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $d->student->user->name }}</td>
                                 <td>{{ $d->student->institution }}</td>
+                                <td>{{ $d->student->intern->division->name }}</td>
                                 <td>
                                     <a href="{{ route('interns.show', $d->uuid) }}" class="btn btn-info btn-md">
                                         <i class="bi bi-eye"></i>
