@@ -32,25 +32,25 @@
                             <td>{{ $s->institution }}</td>
                             <td>
                                 {{-- Button Detail --}}
-                                <a href="{{ route('students.show', $s->id) }}" class="btn btn-md btn-info"><i
+                                <a href="{{ route('students.show', $s->user->uuid) }}" class="btn btn-md btn-info"><i
                                         class="bi bi-eye"></i></a>
                                 {{-- End Button Detail --}}
 
                                 {{-- Button Edit --}}
-                                <a href="{{ route('students.edit', $s->id) }}" class="btn btn-md btn-warning"><i
+                                <a href="{{ route('students.edit', $s->user->uuid) }}" class="btn btn-md btn-warning"><i
                                         class="bi bi-pencil-square"></i></a>
                                 {{-- End Button Edit --}}
 
                                 {{-- Button Hapus --}}
                                 <!-- Modal trigger button -->
                                 <button type="button" class="btn btn-danger btn-md-danger" data-bs-toggle="modal"
-                                    data-bs-target="#modalId-{{ $s->id }}">
+                                    data-bs-target="#modalId-{{ $s->user->uuid }}">
                                     <i class="bi bi-trash"></i>
                                 </button>
 
                                 <!-- Modal Body -->
                                 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-                                <div class="modal fade" id="modalId-{{ $s->id }}" tabindex="-1"
+                                <div class="modal fade" id="modalId-{{ $s->user->uuid }}" tabindex="-1"
                                     data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
                                     aria-labelledby="modalTitleId" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md"
@@ -70,7 +70,8 @@
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                                     Kembali
                                                 </button>
-                                                <form action="{{ route('students.destroy', $s->id) }}" method="post">
+                                                <form action="{{ route('students.destroy', $s->user->uuid) }}"
+                                                    method="post">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit" class="btn btn-danger">Hapus</button>

@@ -22,7 +22,7 @@ class StudentRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                Rule::unique('users', 'email')->ignore($this->student?->user_id),
+                Rule::unique('users', 'email')->ignore($this->student?->uuid, 'uuid'),
             ],
 
             'password' => [

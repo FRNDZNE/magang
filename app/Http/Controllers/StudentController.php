@@ -67,7 +67,7 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Student $student)
+    public function show(User $student)
     {
         return view('student.show', compact('student'));
     }
@@ -75,32 +75,30 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Student $student)
+    public function edit(User $student)
     {
-        $students = Student::all();
         return view('student.edit', compact('student'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(StudentRequest $request, Student $student)
+    public function update(StudentRequest $request, User $student)
     {
         try {
             $form = $request->validated();
 
             DB::transaction(function() use ($form, $student){
 
-                $user = User::findOrFail($student->user_id);
-                $user->update([
+                $student->update([
                     'name' => $form['name'],
                     'email' => $form['email'],
                     'password' => !empty($form['password'])
                         ? bcrypt($form['password'])
-                        : $user->password,
+                        : $student->password,
                 ]);
 
-                $student->update([
+                $student->student->update([
                     'student_number' => $form['student_number'],
                     'institution' => $form['institution'],
                     'major' => $form['major'],
@@ -108,7 +106,7 @@ class StudentController extends Controller
                     'address' => $form['address'],
                 ]);
 
-                $user->syncRoles(['student']);
+                $student->syncRoles(['student']);
             });
 
             return redirect()->route('students.index')->with('success','Berhasil Mengupdate Student');
@@ -123,7 +121,7 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Student $student)
+    public function destroy(User $student)
     {
         try {
             User::find($student->user_id)->delete();
