@@ -27,6 +27,18 @@ class InternController extends Controller
         return view('intern.index', compact('data'));
     }
 
+    public function history()
+    {
+        $data = Intern::withTrashed()->orderBy('created_at','desc')->paginate(10);
+        return view('intern.history', compact('data'));
+    }
+
+    public function history_student($student_id)
+    {
+        $data = Intern::withTrashed()->where('student_id',$student_id)->orderBy('created_at','desc')->get();
+        return view('intern.history-student', compact('data'));
+    }
+
     /**
      * Show the form for creating a new resource for student.
      */
@@ -49,7 +61,7 @@ class InternController extends Controller
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date'],
         ]);
-        return redirect()->route('dashboard')->with('success', 'Pengajuan magang berhasil dikirim.');
+        return redirect()->route('interns.index')->with('success', 'Pengajuan magang berhasil dikirim.');
     }
 
     /**
@@ -82,9 +94,28 @@ class InternController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
+    public function denied(Intern $intern)
+    {
+        $intern->update(['status' => 'd']);
+        $intern->delete();
+        return back()->with('success','Penolakan Berhasil dan Pengajuan dihapus!');
+    }
     public function destroy(Intern $intern)
     {
-        
-        return back()->with('success','Intern deleted successfully.');
+        $intern->delete();
+        return redirect()->back()->with('success','Berhasil Membatalkan Pengajuan Magang!');
+    }
+
+    public function process(Intern $intern)
+    {
+        $intern->update(['status' => 'p']);
+        return back()->with('success','Intern is now in process.');
+    }
+
+    public function accept(Intern $intern)
+    {
+        $intern->update(['status' => 'a']);
+        return back()->with('success','Intern has been approved.');
     }
 }

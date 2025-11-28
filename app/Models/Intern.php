@@ -30,5 +30,10 @@ class Intern extends Model
         return $this->hasMany(ScoreValue::class);
     }
 
+    public function division()
+    {
+        return $this->belongsTo(Division::class);
+    }
+
 
 }

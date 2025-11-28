@@ -5,9 +5,9 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Masukan Pengajuan Magang</h3>
+            <h3 class="card-title">Edit Pengajuan Magang</h3>
         </div>
-        <form action="{{ route('interns.update', $) }}" method="post">
+        <form action="{{ route('interns.update', $intern->uuid) }}" method="post">
             @csrf
             <div class="card-body">
                 <div class="row mb-3">
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="start_date">Tanggal Mulai</label>
@@ -55,10 +55,15 @@
                     </div>
 
                 </div>
+                <div class="row mb-3 justify-content-center">
+                    <div class="col-12 text-center">
+                        <p class="text-muted">FYI : Pengajuan tidak bisa dirubah setelah diproses oleh admin</p>
+                    </div>
+                </div>
             </div>
             <div class="card-footer">
                 <a href="{{ route('interns.index') }}" class="btn btn-secondary">Kembali</a>
-                <button type="submit" class="btn btn-primary">Ajukan</button>
+                <button type="submit" class="btn btn-warning">Update Pengajuan</button>
             </div>
         </form>
     </div>

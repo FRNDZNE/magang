@@ -6,6 +6,12 @@
             <p>Pengajuan Magang</p>
         </a>
     </li>
+    <li class="nav-item">
+        <a href="{{ route('interns.history') }}" class="nav-link {{ Route::is('interns.history') ? 'active' : '' }}">
+            <i class="bi bi-clock-history"></i>
+            <p>History Pengajuan</p>
+        </a>
+    </li>
 
     <li class="nav-header">Mahasiswa</li>
     <li class="nav-item">

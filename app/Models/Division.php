@@ -12,4 +12,9 @@ class Division extends Model
     {
         return $this->hasMany(Mentor::class);
     }
+
+    public function intern()
+    {
+        return $this->hasMany(Intern::class);
+    }
 }

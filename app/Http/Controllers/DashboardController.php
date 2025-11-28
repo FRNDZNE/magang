@@ -32,6 +32,13 @@ class DashboardController extends Controller
 
     public function student()
     {
-        return view('dashboard.student');
+        $student_id = Auth::user()->student->id;
+        $data['internship'] = Intern::where('student_id',$student_id)->first();
+        $data['pengajuan'] = Intern::withTrashed()->where('student_id',$student_id)->count();
+        $data['terkonfirmasi'] = Intern::where('student_id',$student_id)->where('status','c')->count();
+        $data['process'] = Intern::where('student_id',$student_id)->where('status','p')->count();
+        $data['accepted'] = Intern::where('student_id',$student_id)->where('status','a')->count();
+        $data['denied'] = Intern::withTrashed()->where('student_id',$student_id)->where('status','d')->count();
+        return view('dashboard.student',compact('data'));
     }
 }
