@@ -71,9 +71,6 @@
                                 <td>{{ $data->start_date }}</td>
                                 <td>{{ $data->end_date }}</td>
                                 <td>
-                                    <a href="{{ route('interns.show', $data->uuid) }}" class="btn btn-info btn-md">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
                                     <a href="{{ route('interns.edit', $data->uuid) }}" class="btn btn-warning btn-md">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
