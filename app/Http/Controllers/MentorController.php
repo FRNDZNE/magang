@@ -9,42 +9,36 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\MentorRequest;
 
-
 class MentorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $mentors = Mentor::with('user')->paginate(10);
-        return view('mentor.index',compact('mentors'));
+        return view('mentor.index', compact('mentors'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $divisions = Division::all();
-        return view('mentor.create',compact('divisions'));
+        return view('mentor.create', compact('divisions'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(MentorRequest $request)
     {
         try {
             $form = $request->validated();
-            DB::transaction(function() use ($form){
+
+            DB::transaction(function () use ($form) {
+
+                // Create user + UUID
                 $user = User::create([
-                    'name' => $form['name'],
                     'uuid' => Str::uuid(),
-                    'email_verified_at' => now(),
+                    'name' => $form['name'],
                     'email' => $form['email'],
+                    'email_verified_at' => now(),
                     'password' => bcrypt($form['password'])
                 ]);
+
                 Mentor::create([
                     'user_id' => $user->id,
                     'division_id' => $form['division_id'],
@@ -54,62 +48,69 @@ class MentorController extends Controller
 
                 $user->assignRole('mentor');
             });
-            return redirect()->route('mentors.index')->with('success','Berhasil Menambahkan Mentor');
-            
+
+            return redirect()->route('mentors.index')->with('success', 'Berhasil Menambahkan Mentor');
+
         } catch (\Throwable $th) {
-            //throw $th;
             return redirect()->back()->with('error', $th->getMessage());
         }
     }
 
-    /**
-     * Display the specified resource.
+    /** 
+     * SHOW → menggunakan User binding (UUID)
      */
-    public function show(Mentor $mentor)
+    public function show(User $mentor)
     {
-        return view('mentor.show', compact('mentor'));
+        // Ambil data mentor via relasi
+        $data = $mentor->mentor;
+
+        return view('mentor.show', [
+            'user' => $mentor,
+            'mentor' => $data
+        ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * EDIT → menggunakan User binding (UUID)
      */
-    public function edit(Mentor $mentor)
+    public function edit(User $mentor)
     {
         $divisions = Division::all();
-        return view('mentor.edit', compact('divisions','mentor'));
+
+        return view('mentor.edit', [
+            'user' => $mentor,
+            'mentor' => $mentor->mentor,
+            'divisions' => $divisions
+        ]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * UPDATE → menggunakan User binding (UUID)
      */
-    public function update(MentorRequest $request, Mentor $mentor)
+    public function update(MentorRequest $request, User $mentor)
     {
         try {
             $form = $request->validated();
 
             DB::transaction(function () use ($form, $mentor) {
 
-                // Ambil user dari mentor
-                $user = User::findOrFail($mentor->user_id);
-
                 // Update user
-                $user->update([
+                $mentor->update([
                     'name' => $form['name'],
-                    'email' => $form['email'], // email sudah divalidasi di request
+                    'email' => $form['email'],
                     'password' => !empty($form['password'])
-                                    ? bcrypt($form['password'])
-                                    : $user->password,
+                        ? bcrypt($form['password'])
+                        : $mentor->password,
                 ]);
 
-                // Update mentor
-                $mentor->update([
+                // Update mentor table via relasi
+                $mentor->mentor->update([
                     'division_id'     => $form['division_id'],
                     'employee_number' => $form['employee_number'],
                     'phone'           => $form['phone'],
                 ]);
 
-                // Pastikan role tetap mentor
-                $user->syncRoles(['mentor']);
+                $mentor->syncRoles(['mentor']);
             });
 
             return redirect()->route('mentors.index')->with('success', 'Berhasil Mengubah Mentor');
@@ -119,18 +120,16 @@ class MentorController extends Controller
         }
     }
 
-
-
     /**
-     * Remove the specified resource from storage.
+     * DESTROY → menggunakan User binding (UUID)
      */
-    public function destroy(Mentor $mentor)
+    public function destroy(User $mentor)
     {
         try {
-            User::find($mentor->user_id)->delete();
+            $mentor->delete(); // Soft delete user
             return redirect()->back()->with('success', 'Berhasil Menghapus Data');
+
         } catch (\Throwable $th) {
-            //throw $th;
             return redirect()->back()->with('error', $th->getMessage());
         }
     }

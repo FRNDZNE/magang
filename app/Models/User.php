@@ -53,4 +53,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(Mentor::class, 'user_id', 'id');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
 }

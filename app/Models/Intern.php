@@ -35,5 +35,10 @@ class Intern extends Model
         return $this->belongsTo(Division::class);
     }
 
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
+
 
 }

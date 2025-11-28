@@ -7,7 +7,7 @@
         <div class="card-header">
             <h3 class="card-title">Edit Pengajuan Magang</h3>
         </div>
-        <form action="{{ route('interns.update', $intern->id) }}" method="post">
+        <form action="{{ route('interns.update', $intern->uuid) }}" method="post">
             @csrf
             @method('PUT')
             <div class="card-body">
