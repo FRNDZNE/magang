@@ -124,7 +124,7 @@ class StudentController extends Controller
     public function destroy(User $student)
     {
         try {
-            User::find($student->user_id)->delete();
+            $student->delete();
             return redirect()->back()->with('success','Berhasil Menghapus Student');
         } catch (\Throwable $th) {
             //throw $th;
