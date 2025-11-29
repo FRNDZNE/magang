@@ -98,7 +98,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row justify-content-center mb-3">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -115,4 +115,30 @@
             </div>
         </div>
     </div>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Detail Penilaian</h3>
+                </div>
+
+                <div class="card-body">
+
+                    @if ($data['score']->isEmpty())
+                        <p>Belum ada penilaian.</p>
+                    @else
+                        @foreach ($data['score'] as $item)
+                            <div class="mb-2">
+                                <strong>{{ $item->name }} :</strong>
+                                {{ $data['my_score'][$item->id]->value ?? 'N/A' }}
+                            </div>
+                        @endforeach
+                    @endif
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 @endsection

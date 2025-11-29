@@ -14,7 +14,6 @@
             <p>History Pengajuan</p>
         </a>
     </li>
-
     <li class="nav-header">Mahasiswa</li>
     <li class="nav-item">
         <a href="./docs/introduction.html" class="nav-link">

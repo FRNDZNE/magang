@@ -16,6 +16,7 @@
                 <div class="col-12">
                     <p><strong>Nama:</strong> {{ $intern->student->institution }}</p>
                     <p><strong>Divisi yang Dituju:</strong> {{ $intern->division->name }}</p>
+                    <p><strong>Mentor :</strong> {{ $intern->mentor->user->name }}</p>
                     <p><strong>Tanggal Mulai Magang:</strong> {{ $intern->start_date }}</p>
                     <p><strong>Tanggal Selesai Magang:</strong> {{ $intern->end_date }}</p>
                     <p><strong>Status Pengajuan:</strong>
@@ -172,9 +173,9 @@
                 {{-- End Modal Terima --}}
             @endif
             @if ($intern->status == 'a')
-                <a href="" class="btn btn-md btn-warning">Logbook</a>
-                <a href="" class="btn btn-md btn-warning">Absensi</a>
-                <a href="" class="btn btn-md btn-warning">Penilaian</a>
+                <a href="" class="btn btn-md btn-secondary">Logbook</a>
+                <a href="" class="btn btn-md btn-dark">Absensi</a>
+                <a href="" class="btn btn-md btn-info">Penilaian</a>
             @endif
         </div>
     </div>
