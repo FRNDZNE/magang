@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Logbook;
+use App\Models\Intern;
 use Illuminate\Http\Request;
 
 class LogbookController extends Controller
@@ -10,16 +11,16 @@ class LogbookController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Intern $intern)
     {
-        $data = Logbook::orderby('created_at', 'desc')->paginate(5);
+        $data = Logbook::where('intern_id', $intern->id)->get();
         return view('logbook.index', compact('data'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Intern $intern)
     {
         return view('logbook.create');
     }
