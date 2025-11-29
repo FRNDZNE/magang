@@ -5,7 +5,12 @@
     <li class="breadcrumb-item active">Detail Pengajuan Magang</li>
 @endsection
 @section('content')
-    <a href="{{ route('interns.index') }}" class="btn btn-md btn-secondary">Kembali</a>
+    @role('admin')
+        <a href="{{ route('interns.index') }}" class="btn btn-md btn-secondary">Kembali</a>
+    @endrole
+    @role('mentor')
+        <a href="{{ route('dashboard') }}" class="btn btn-md btn-secondary">Kembali</a>
+    @endrole
     <hr>
     <div class="card">
         <div class="card-header">
@@ -22,7 +27,7 @@
                     <p><strong>Mentor :</strong> {{ $intern->mentor->user->name }}</p>
                     <p><strong>Tanggal Mulai Magang:</strong> {{ $intern->start_date }}</p>
                     <p><strong>Tanggal Selesai Magang:</strong> {{ $intern->end_date }}</p>
-                    <p><strong>Status Pengajuan:</strong>
+                    <p @role('mentor') class="d-none" @endrole><strong>Status Pengajuan:</strong>
                         @if ($intern->status == 'c')
                             @if ($intern->deleted_at)
                                 <span class="badge bg-secondary">Dibatalkan</span>

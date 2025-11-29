@@ -12,7 +12,6 @@
         <!--end::Start Navbar Links-->
         <!--begin::End Navbar Links-->
         <ul class="navbar-nav ms-auto">
-
             <!--begin::Notification Dropdown Menu-->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-bs-toggle="dropdown" href="#">
@@ -24,15 +23,17 @@
                         <!--begin::Message-->
                         <div class="d-flex">
                             <div class="flex-shrink-0">
-                                <img src="{{ asset('/') }}/assets/img/user1-128x128.jpg" alt="User Avatar"
-                                    class="img-size-50 rounded-circle me-3" />
+                                <div class="rounded-circle bg-primary d-flex justify-content-center align-items-center me-3"
+                                    style="width: 55px; height: 55px;">
+                                    <i class="bi bi-person-fill text-white fs-4"></i>
+                                </div>
                             </div>
                             <div class="flex-grow-1">
                                 <h3 class="dropdown-item-title">
-                                    Brad Diesel
+                                    Head Notification
                                     <span class="float-end fs-7 text-danger"><i class="bi bi-star-fill"></i></span>
                                 </h3>
-                                <p class="fs-7">Call me whenever you can...</p>
+                                <p class="fs-7">Message</p>
                                 <p class="fs-7 text-secondary">
                                     <i class="bi bi-clock-fill me-1"></i> 4 Hours Ago
                                 </p>

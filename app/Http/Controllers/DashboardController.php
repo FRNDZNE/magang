@@ -30,7 +30,7 @@ class DashboardController extends Controller
     public function mentor()
     {
         $mentor_id = Auth::user()->mentor->id;
-        $data['mentee'] = Intern::where('mentor_id',$mentor_id)->count();    
+        $data['mentee'] = Intern::where('mentor_id',$mentor_id)->get();    
         return view('dashboard.mentor',compact('data'));
     }
 
