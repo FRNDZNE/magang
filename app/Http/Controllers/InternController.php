@@ -75,7 +75,7 @@ class InternController extends Controller
     public function show(Intern $intern)
     {
         $mentors = Mentor::where('division_id', $intern->division_id)->get();
-        return view('intern.show', compact('intern'));
+        return view('intern.show', compact('intern','mentors'));
     }
 
     /**
@@ -105,12 +105,12 @@ class InternController extends Controller
     {
         $intern->update(['status' => 'd']);
         $intern->delete();
-        return back()->with('success','Penolakan Berhasil dan Pengajuan dihapus!');
+        return redirect()->route('interns.index')->with('success','Penolakan Berhasil dan Pengajuan dihapus!');
     }
     public function destroy(Intern $intern)
     {
         $intern->delete();
-        return redirect()->back()->with('success','Berhasil Menolak Pengajuan Magang!');
+        return redirect()->back()->with('success','Berhasil Membatalkan Pengajuan Magang!');
     }
 
     public function process(Intern $intern)
@@ -125,6 +125,6 @@ class InternController extends Controller
             'status' => 'a',
             'mentor_id' => $request->mentor_id, 
         ]);
-        return back()->with('success','Berhasil Menerima Pengajuan Magang!');
+        return redirect()->route('interns.index')->with('success','Berhasil Menerima Pengajuan Magang!');
     }
 }

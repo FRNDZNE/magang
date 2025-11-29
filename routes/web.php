@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function(){
     Route::get('interns/history/{student}',[InternController::class,'history_student'])->name('interns.history.student');
     Route::put('interns/{intern}/process', [InternController::class, 'process'])->name('interns.process');
     Route::put('interns/{intern}/accept', [InternController::class, 'accept'])->name('interns.accept');
-    Route::put('interns/{intern}/denied', [InternController::class, 'denied'])->name('interns.denied');
+    Route::delete('interns/{intern}/denied', [InternController::class, 'denied'])->name('interns.denied');
     Route::resource('interns', InternController::class);
     Route::resource('interns.score-values', ScoreValueController::class);
     Route::resource('interns.logbook', LogbookController::class);

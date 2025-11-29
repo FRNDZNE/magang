@@ -97,7 +97,7 @@
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p>Apakah anda yakin ingin menghapus pengajuan magang di divisi
+                                                        <p>Apakah anda yakin ingin membatalkan pengajuan magang di divisi
                                                             {{ $data->division->name }} ini?
                                                         </p>
                                                     </div>
@@ -110,7 +110,7 @@
                                                             method="post">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                            <button type="submit" class="btn btn-danger">Batalkan</button>
                                                         </form>
                                                     </div>
                                                 </div>

@@ -35,6 +35,10 @@ class DashboardController extends Controller
         $student_id = Auth::user()->student->id;
         $data['internship'] = Intern::where('student_id',$student_id)->first();
         $data['pengajuan'] = Intern::withTrashed()->where('student_id',$student_id)->count();
+        $data['dibatalkan'] = Intern::withTrashed()->where([
+            'student_id' => $student_id,
+            'status' => 'c',
+        ])->whereNotNull('deleted_at')->count();
         $data['terkonfirmasi'] = Intern::where('student_id',$student_id)->where('status','c')->count();
         $data['process'] = Intern::where('student_id',$student_id)->where('status','p')->count();
         $data['accepted'] = Intern::where('student_id',$student_id)->where('status','a')->count();

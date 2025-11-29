@@ -4,7 +4,7 @@
 @section('page-active', 'active')
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-6">
             <div class="info-box">
                 <span class="info-box-icon text-bg-info shadow-sm">
                     <i class="bi bi-card-checklist"></i>
@@ -13,6 +13,22 @@
                     <span class="info-box-text">Jumlah Pengajuan</span>
                     <span class="info-box-number">
                         {{ $data['pengajuan'] }}
+                        <small>Pengajuan</small>
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="info-box">
+                <span class="info-box-icon text-bg-dark shadow-sm">
+                    <i class="bi bi-x-octagon-fill"></i>
+
+                </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Pengajuan Dibatalkan</span>
+                    <span class="info-box-number">
+                        {{ $data['dibatalkan'] }}
                         <small>Pengajuan</small>
                     </span>
                 </div>
