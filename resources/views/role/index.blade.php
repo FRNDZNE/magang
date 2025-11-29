@@ -39,7 +39,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="guard_name">Display</label>
+                                    <label for="guard_name">Guard Name</label>
                                     <input type="text" name="guard_name" id="guard_name"
                                         class="form-control @error('guard_name') is-invalid @else @if (old('guard_name')) is-valid @endif @enderror"
                                         value="{{ old('guard_name') }}">
@@ -68,7 +68,7 @@
                     <tr>
                         <th style="width: 10px">No</th>
                         <th>Nama Role</th>
-                        <th>Display</th>
+                        <th>Guard Name</th>
                         <th style="width: 200px">Aksi</th>
                     </tr>
                 </thead>

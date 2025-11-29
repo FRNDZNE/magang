@@ -24,7 +24,6 @@ class PermissionRequest extends FormRequest
         return [
             'name' => [
                 'required',
-                'unique:permissions,name,' . $this->permission?->id,
                 'regex:/^\S+$/',
             ],
             'guard_name' => ['required']
@@ -46,7 +45,6 @@ class PermissionRequest extends FormRequest
         return [
             'required' => ':attribute Tidak Boleh Kosong',
             'regex' => ':attribute Tidak Boleh Mengandung Spasi',
-            'unique' => ':attribute Sudah Digunakan'
         ];
     }
 }

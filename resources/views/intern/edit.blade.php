@@ -56,11 +56,6 @@
                     </div>
 
                 </div>
-                <div class="row mb-3 justify-content-center">
-                    <div class="col-12 text-center">
-                        <p class="text-muted">FYI : Pengajuan tidak bisa dirubah setelah diproses oleh admin</p>
-                    </div>
-                </div>
             </div>
             <div class="card-footer">
                 <a href="{{ route('interns.index') }}" class="btn btn-secondary">Kembali</a>

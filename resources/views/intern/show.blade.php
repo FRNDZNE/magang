@@ -35,30 +35,23 @@
                     </p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <select name="" id="" class="form-control"></select>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="card-footer">
             @if ($intern->status == 'c')
                 <!-- Modal trigger button -->
-                <button type="button" class="btn btn-warning btn-md" data-bs-toggle="modal" data-bs-target="#modalId">
+                <button type="button" class="btn btn-warning btn-md" data-bs-toggle="modal" data-bs-target="#modalproses">
                     Proses
                 </button>
 
                 <!-- Modal Body -->
                 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-                <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                <div class="modal fade" id="modalproses" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
                     role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="modalTitleId">
-                                    Modal title
+                                    Proses Pengajuan Magang
                                 </h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
@@ -84,6 +77,43 @@
                 </div>
             @endif
             @if ($intern->status == 'p')
+                {{-- Modal Tolak --}}
+                <!-- Modal trigger button -->
+                <button type="button" class="btn btn-danger btn-md" data-bs-toggle="modal" data-bs-target="#modalId">
+                    Tolak
+                </button>
+
+                <!-- Modal Body -->
+                <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+                <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                    role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalTitleId">
+                                    Tolak Pengajuan Magang
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    Apakah anda yakin ingin menolak pengajuan magang
+                                    <strong>{{ $intern->student->user->name }}</strong>?
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="button" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- End Modal Tolak --}}
+                {{-- Modal Terima --}}
+                {{-- End Modal Terima --}}
             @endif
         </div>
     </div>

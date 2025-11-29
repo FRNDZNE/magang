@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\Intern;
 use App\Models\Division;
+use App\Models\Mentor;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\InternRequestForStudent;
@@ -73,6 +74,7 @@ class InternController extends Controller
      */
     public function show(Intern $intern)
     {
+        $mentors = Mentor::where('division_id', $intern->division_id)->get();
         return view('intern.show', compact('intern'));
     }
 
@@ -108,7 +110,7 @@ class InternController extends Controller
     public function destroy(Intern $intern)
     {
         $intern->delete();
-        return redirect()->back()->with('success','Berhasil Membatalkan Pengajuan Magang!');
+        return redirect()->back()->with('success','Berhasil Menolak Pengajuan Magang!');
     }
 
     public function process(Intern $intern)
@@ -117,9 +119,12 @@ class InternController extends Controller
         return redirect()->back()->with('success','Pengajuan berhasil diproses.');
     }
 
-    public function accept(Intern $intern)
+    public function accept(Request $request,Intern $intern)
     {
-        $intern->update(['status' => 'a']);
-        return back()->with('success','Intern has been approved.');
+        $intern->update([
+            'status' => 'a',
+            'mentor_id' => $request->mentor_id, 
+        ]);
+        return back()->with('success','Berhasil Menerima Pengajuan Magang!');
     }
 }
