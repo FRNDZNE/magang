@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MentorController;
@@ -53,6 +54,7 @@ Route::middleware('auth')->group(function(){
     Route::put('interns/{intern}/accept', [InternController::class, 'accept'])->name('interns.accept');
     Route::delete('interns/{intern}/denied', [InternController::class, 'denied'])->name('interns.denied');
     Route::resource('interns', InternController::class);
+    Route::resource('interns.attendance', AttendanceController::class)->except(['create','edit','show','destroy']);
     Route::resource('interns.score-values', ScoreValueController::class);
     Route::resource('interns.logbook', LogbookController::class);
     Route::resource('interns.logbooks.images',LogbookImageController::class);

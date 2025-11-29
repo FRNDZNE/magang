@@ -14,7 +14,10 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-12">
-                    <p><strong>Nama:</strong> {{ $intern->student->institution }}</p>
+                    <p><strong>Kontak:</strong> <a href="https://wa.me/{{ $intern->student->phone ?? 'Belum Ditentukan' }}"
+                            target="_blank">{{ $intern->student->phone }}</a>
+                    </p>
+                    <p><strong>Asal Institusi:</strong> {{ $intern->student->institution }}</p>
                     <p><strong>Divisi yang Dituju:</strong> {{ $intern->division->name }}</p>
                     <p><strong>Mentor :</strong> {{ $intern->mentor->user->name }}</p>
                     <p><strong>Tanggal Mulai Magang:</strong> {{ $intern->start_date }}</p>
@@ -173,9 +176,11 @@
                 {{-- End Modal Terima --}}
             @endif
             @if ($intern->status == 'a')
-                <a href="" class="btn btn-md btn-secondary">Logbook</a>
-                <a href="" class="btn btn-md btn-dark">Absensi</a>
-                <a href="" class="btn btn-md btn-info">Penilaian</a>
+                <a href="{{ route('interns.logbook.index', $intern->uuid) }}"
+                    class="btn btn-md btn-secondary">Logbook</a>
+                <a href="{{ route('interns.attendance.index', $intern->uuid) }}" class="btn btn-md btn-dark">Absensi</a>
+                <a href="{{ route('interns.score-values.index', $intern->uuid) }}"
+                    class="btn btn-md btn-info">Penilaian</a>
             @endif
         </div>
     </div>

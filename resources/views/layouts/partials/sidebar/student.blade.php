@@ -16,13 +16,13 @@
     </li>
     <li class="nav-header">Mahasiswa</li>
     <li class="nav-item">
-        <a href="./docs/introduction.html" class="nav-link">
+        <a href="{{ route('interns.logbook.index', Auth::user()->student->intern->uuid) }}" class="nav-link">
             <i class="nav-icon bi bi-journal-text"></i>
             <p>Logbook</p>
         </a>
     </li>
     <li class="nav-item">
-        <a href="./docs/introduction.html" class="nav-link">
+        <a href="{{ route('interns.attendance.index', Auth::user()->student->intern->uuid) }}" class="nav-link">
             <i class="nav-icon bi bi-calendar-check"></i>
             <p>Absensi</p>
         </a>
