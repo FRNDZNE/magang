@@ -9,6 +9,7 @@ use App\Models\Mentor;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\InternRequestForStudent;
+use App\Http\Requests\SelectMentorRequest;
 
 class InternController extends Controller
 {
@@ -23,15 +24,23 @@ class InternController extends Controller
             $student_id = $user->student->id;
             $data = Intern::where('student_id', $student_id)->first();
         } else {
-            $data = Intern::paginate(10);
+            $data = Intern::where('status','!=','a')->paginate(10);
         }
         return view('intern.index', compact('data'));
     }
 
     public function history()
     {
-        $data = Intern::withTrashed()->orderBy('created_at','desc')->paginate(10);
+        $data = Intern::withTrashed()->whereNot(function($q){
+            $q->whereNotNull('deleted_at')->where('status','c');
+        })->orderBy('created_at','desc')->paginate(10);
         return view('intern.history', compact('data'));
+    }
+
+    public function accepted()
+    {
+        $data = Intern::where('status','a')->orderBy('created_at','desc')->paginate(10);
+        return view('intern.accepted', compact('data'));
     }
 
     public function history_student($uuid)
@@ -119,8 +128,9 @@ class InternController extends Controller
         return redirect()->back()->with('success','Pengajuan berhasil diproses.');
     }
 
-    public function accept(Request $request,Intern $intern)
+    public function accept(SelectMentorRequest $request,Intern $intern)
     {
+        $request->validated();
         $intern->update([
             'status' => 'a',
             'mentor_id' => $request->mentor_id, 

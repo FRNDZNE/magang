@@ -116,8 +116,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @else
+                                    @elseif($data->status == 'p')
                                         <span class="badge bg-warning">Dalam Proses</span>
+                                    @elseif($data->status == 'a')
+                                        <span class="badge bg-success">Diterima</span>
+                                    @elseif($data->status == 'd')
+                                        <span class="badge bg-danger">Ditolak</span>
                                     @endif
                                 </td>
                             </tr>

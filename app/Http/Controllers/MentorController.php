@@ -56,9 +56,7 @@ class MentorController extends Controller
         }
     }
 
-    /**
-     * SHOW → menggunakan User binding (UUID)
-     */
+    
     public function show(User $mentor)
     {
         // Ambil data mentor via relasi
@@ -70,9 +68,7 @@ class MentorController extends Controller
         ]);
     }
 
-    /**
-     * EDIT → menggunakan User binding (UUID)
-     */
+
     public function edit(User $mentor)
     {
         $divisions = Division::all();
@@ -84,9 +80,6 @@ class MentorController extends Controller
         ]);
     }
 
-    /**
-     * UPDATE → menggunakan User binding (UUID)
-     */
     public function update(MentorRequest $request, User $mentor)
     {
         try {
@@ -120,9 +113,6 @@ class MentorController extends Controller
 
     }
 
-    /**
-     * DESTROY → menggunakan User binding (UUID)
-     */
     public function destroy(User $mentor)
     {
         try {

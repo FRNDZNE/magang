@@ -143,7 +143,8 @@
                                         bersangkutan</p>
                                     <div class="mb-3">
                                         <label for="mentor_id" class="form-label">Pilih Mentor</label>
-                                        <select class="form-select" name="mentor_id" id="mentor_id" required>
+                                        <select class="form-select @error('mentor_id') is-invalid @enderror"
+                                            name="mentor_id" id="mentor_id" required>
                                             <option value="" selected disabled>-- Pilih Mentor --</option>
                                             @foreach ($mentors as $m)
                                                 <option value="{{ $m->id }}">
@@ -151,6 +152,11 @@
                                                 </option>
                                             @endforeach
                                         </select>
+                                        @error('mentor_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -163,16 +169,12 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Optional: Place to the bottom of scripts -->
-                <script>
-                    const myModal = new bootstrap.Modal(
-                        document.getElementById("modalId"),
-                        options,
-                    );
-                </script>
-
                 {{-- End Modal Terima --}}
+            @endif
+            @if ($intern->status == 'a')
+                <a href="" class="btn btn-md btn-warning">Logbook</a>
+                <a href="" class="btn btn-md btn-warning">Absensi</a>
+                <a href="" class="btn btn-md btn-warning">Penilaian</a>
             @endif
         </div>
     </div>

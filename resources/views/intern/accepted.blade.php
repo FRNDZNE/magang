@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title', 'History Pengajuan Magang')
+@section('title', 'Magang')
 @section('role', ucfirst(Auth::user()->getRoleNames()->first()))
 @section('page-active', 'active')
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">History Pengajuan Magang</h3>
+            <h3 class="card-title">Magang</h3>
         </div>
         <div class="card-body">
             <table class="table table-bordered">
@@ -13,9 +13,9 @@
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
-                        <th>Divisi Tujuan</th>
                         <th>Asal Institusi</th>
-                        <th>Status</th>
+                        <th>Divisi Tujuan</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 @foreach ($data as $d)
@@ -23,18 +23,12 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $d->student->user->name }}</td>
-                            <td>{{ $d->division->name }}</td>
                             <td>{{ $d->student->institution }}</td>
+                            <td>{{ $d->student->intern->division->name }}</td>
                             <td>
-                                @if ($d->status == 'c' && !$d->deleted_at)
-                                    <span class="badge bg-primary">Terkonfirmasi</span>
-                                @elseif ($d->status == 'p')
-                                    <span class="badge bg-warning">Sedang diproses</span>
-                                @elseif ($d->status == 'a')
-                                    <span class="badge bg-success">Diterima</span>
-                                @elseif ($d->status == 'd')
-                                    <span class="badge bg-danger">Ditolak</span>
-                                @endif
+                                <a href="{{ route('interns.show', $d->uuid) }}" class="btn btn-info btn-md">
+                                    <i class="bi bi-eye"></i>
+                                </a>
                             </td>
                         </tr>
                     </tbody>

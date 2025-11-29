@@ -73,7 +73,7 @@
                     <i class="bi bi-check-circle"></i>
                 </span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Pengjauan Diterima</span>
+                    <span class="info-box-text">Pengajauan Diterima</span>
                     <span class="info-box-number">
                         {{ $data['accepted'] }}
                         <small>Pengajuan</small>
@@ -106,7 +106,7 @@
                 </div>
                 <div class="card-body">
                     <p><b>Divisi Tujuan :</b> {{ $data['internship']->division->name ?? 'Belum Mengajukan' }}</p>
-                    <p><b>Mentor :</b> {{ $data['internship']->mentor->name ?? 'Belum Ditentukan' }}</p>
+                    <p><b>Mentor :</b> {{ $data['internship']->mentor->user->name ?? 'Belum Ditentukan' }}</p>
                     <p><b>Nomor Pegawai :</b> {{ $data['internship']->mentor->employee_number ?? 'Belum Ditentukan' }}</p>
                     <p><b>Kontak :</b> <a
                             href="https://wa.me/{{ $data['internship']->mentor->phone ?? 'Belum Ditentukan' }}">{{ $data['internship']->mentor->phone ?? 'Belum Ditentukan' }}</a>
