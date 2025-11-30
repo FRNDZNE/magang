@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
-use App\Models\Score;
+use App\Models\Intern;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -11,9 +11,9 @@ class AttendanceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Intern $intern)
     {
-        
+        return view('attendance.index',compact('intern'));
     }
 
     /**
@@ -53,11 +53,8 @@ class AttendanceController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Attendance $attendance)
+    public function periodIntern()
     {
-        
+
     }
 }

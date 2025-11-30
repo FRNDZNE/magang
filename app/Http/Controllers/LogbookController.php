@@ -14,7 +14,7 @@ class LogbookController extends Controller
     public function index(Intern $intern)
     {
         $data = Logbook::where('intern_id', $intern->id)->get();
-        return view('logbook.index', compact('data'));
+        return view('logbook.index', compact('data','intern'));
     }
 
     /**

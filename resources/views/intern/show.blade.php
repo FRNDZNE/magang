@@ -1,8 +1,18 @@
 @extends('layouts.app')
-@section('title', 'Pengajuan Magang')
+@role('admin')
+    @section('title', 'Pengajuan Magang')
+@endrole
+@role('mentor')
+    @section('title', ucfirst($intern->student->user->name))
+@endrole
 @section('role', ucfirst(Auth::user()->getRoleNames()->first()))
 @section('breadcrumb')
-    <li class="breadcrumb-item active">Detail Pengajuan Magang</li>
+    @role('admin')
+        <li class="breadcrumb-item active">Detail Pengajuan Magang</li>
+    @endrole
+    @role('mentor')
+        <li class="breadcrumb-item active">Detail Mentee</li>
+    @endrole
 @endsection
 @section('content')
     @role('admin')
@@ -14,11 +24,12 @@
     <hr>
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">{{ $intern->student->user->name }}</h3>
+            <h3 class="card-title">Detail</h3>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-12">
+                    <p><strong>Nama:</strong> {{ $intern->student->user->name }}</p>
                     <p><strong>Kontak:</strong> <a href="https://wa.me/{{ $intern->student->phone ?? 'Belum Ditentukan' }}"
                             target="_blank">{{ $intern->student->phone }}</a>
                     </p>

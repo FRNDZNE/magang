@@ -24,7 +24,7 @@
                 aria-label="Main navigation" data-accordion="false" id="navigation">
                 <li class="nav-item">
                     <a href="{{ route('dashboard') }}"
-                        class="nav-link {{ Route::is('dashboard.' . strtolower(Auth::user()->getRoleNames()->first())) ? 'active' : '' }}">
+                        class="nav-link {{ Route::is('dashboard.' . strtolower(Auth::user()->getRoleNames()->first())) ? 'active' : '' }} @role('mentor') {{ Route::is('interns.*') ? 'active' : '' }} @endrole">
                         <i class="nav-icon bi bi-speedometer2"></i>
                         <p>
                             Dashboard

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ScoreValue;
-use App\Models\Student;
+use App\Models\Intern;
+use App\Models\Score;
+
 use Illuminate\Http\Request;
 
 class ScoreValueController extends Controller
@@ -11,9 +13,11 @@ class ScoreValueController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Intern $intern)
     {
-        
+        $data['score'] = Score::all();
+        $data['score_value'] = ScoreValue::where('intern_id', $intern->id)->get();
+        return view('score-value.index',compact('data','intern'));
     }
 
     /**

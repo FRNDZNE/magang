@@ -1,3 +1,19 @@
-<div>
-    <!-- People find pleasure in different ways. I find it in keeping my mind clear. - Marcus Aurelius -->
-</div>
+@extends('layouts.app')
+@section('title', 'Penilaian')
+@section('role', ucfirst(Auth::user()->getRoleNames()->first()))
+@section('page-active', 'active')
+@section('content')
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Penilaian Magang</h3>
+        </div>
+        <div class="card-body">
+
+        </div>
+        @role('mentor')
+            <div class="card-footer">
+                <a href="{{ route('interns.show', $intern->uuid) }}" class="btn btn-secondary btn-md">Kembali</a>
+            </div>
+        @endrole
+    </div>
+@endsection
