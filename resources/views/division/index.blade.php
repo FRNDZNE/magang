@@ -9,7 +9,7 @@
         </div>
         <div class="card-body">
             <a href="{{ route('divisions.create') }}" class="btn btn-primary mb-3">
-                <i class="bi bi-plus-lg"></i> Tambah Divisi
+                <i class="bi bi-plus"></i> Tambah Divisi
             </a>
 
             <hr>

@@ -9,7 +9,7 @@
         </div>
         <div class="card-body">
             <a href="{{ route('mentors.create') }}" class="btn btn-primary mb-3">
-                <i class="bi bi-plus-lg"></i> Tambah Mentor
+                <i class="bi bi-plus"></i> Tambah Mentor
             </a>
 
             <hr>

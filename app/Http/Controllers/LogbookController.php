@@ -20,7 +20,7 @@ class LogbookController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Intern $intern)
+    public function create()
     {
         return view('logbook.create');
     }

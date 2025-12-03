@@ -9,7 +9,7 @@
         </div>
         <div class="card-body">
             <a href="{{ route('scores.create') }}" class="btn btn-primary mb-3">
-                <i class="bi bi-plus-lg"></i> Tambah Aspek Penilaian
+                <i class="bi bi-plus"></i> Tambah Aspek Penilaian
             </a>
 
             <hr>

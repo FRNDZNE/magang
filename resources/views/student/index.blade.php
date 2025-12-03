@@ -9,7 +9,7 @@
         </div>
         <div class="card-body">
             <a href="{{ route('students.create') }}" class="btn btn-primary mb-3">
-                <i class="bi bi-plus-lg"></i> Tambah Student
+                <i class="bi bi-plus"></i> Tambah Student
             </a>
 
             <hr>
