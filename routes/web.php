@@ -55,8 +55,8 @@ Route::middleware('auth')->group(function(){
     Route::delete('interns/{intern}/denied', [InternController::class, 'denied'])->name('interns.denied');
     Route::resource('interns', InternController::class);
     Route::resource('interns.attendance', AttendanceController::class)->except(['create','edit','show','destroy']);
-    Route::resource('interns.score-values', ScoreValueController::class);
-    Route::resource('interns.logbook', LogbookController::class);
+    Route::resource('interns.score-values', ScoreValueController::class)->only(['index','store']);
+    Route::resource('interns.logbooks', LogbookController::class);
     Route::resource('interns.logbooks.images',LogbookImageController::class);
     Route::resource('scores', ScoreController::class);
     

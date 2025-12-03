@@ -192,7 +192,7 @@
                 {{-- End Modal Terima --}}
             @endif
             @if ($intern->status == 'a')
-                <a href="{{ route('interns.logbook.index', $intern->uuid) }}"
+                <a href="{{ route('interns.logbooks.index', $intern->uuid) }}"
                     class="btn btn-md btn-secondary">Logbook</a>
                 <a href="{{ route('interns.attendance.index', $intern->uuid) }}" class="btn btn-md btn-dark">Absensi</a>
                 <a href="{{ route('interns.score-values.index', $intern->uuid) }}"

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ScoreValueRequest;
 use App\Models\ScoreValue;
 use App\Models\Intern;
 use App\Models\Score;
@@ -21,19 +22,28 @@ class ScoreValueController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ScoreValueRequest $request, Intern $intern)
     {
-        
+        $data = $request->validated();
+        // return $data;
+        try {
+            ScoreValue::updateOrCreate(
+                [
+                    'id' => $data['id'] ?? 0,
+                ],
+                [
+                    'score_id' => $data['score_id'],
+                    'intern_id' => $intern->id,
+                    'value' => $data['value'],
+                ]
+            );
+            return redirect()->back()->with('success','Berhasil Melakukan Input Nilai');
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -63,6 +73,6 @@ class ScoreValueController extends Controller
      */
     public function destroy(ScoreValue $scoreValue)
     {
-        
+        $scoreValue->delete();
     }
 }

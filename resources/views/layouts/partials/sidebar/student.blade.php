@@ -16,8 +16,8 @@
     </li>
     <li class="nav-header">Mahasiswa</li>
     <li class="nav-item">
-        <a href="{{ route('interns.logbook.index', Auth::user()->student->intern->uuid) }}"
-            class="nav-link {{ Route::is('interns.logbook.*') ? 'active' : '' }}">
+        <a href="{{ route('interns.logbooks.index', Auth::user()->student->intern->uuid) }}"
+            class="nav-link {{ Route::is('interns.logbooks.*') ? 'active' : '' }}">
             <i class="nav-icon bi bi-journal-text"></i>
             <p>Logbook</p>
         </a>

@@ -11,7 +11,7 @@ class ScoreValueRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,25 @@ class ScoreValueRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'id' => 'nullable',
+            'score_id' => 'nullable',
+            'intern_id' => 'nullable',
+            'value' => 'required',
+        ];
+    }
+
+    public function attributes() : array
+    {
+        return [
+            'value' => 'Nilai',
+        ];
+    }
+
+
+    public function messages() : array
+    {
+        return [
+            'required' => ':attribute Tidak Boleh Kosong',
         ];
     }
 }

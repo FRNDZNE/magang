@@ -10,7 +10,7 @@
         <div class="card-body">
 
         </div>
-        @role('mentor')
+        @role('mentor|admin')
             <div class="card-footer">
                 <a href="{{ route('interns.show', $intern->uuid) }}" class="btn btn-secondary btn-md">Kembali</a>
             </div>

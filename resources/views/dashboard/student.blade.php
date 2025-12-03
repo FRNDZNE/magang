@@ -105,6 +105,8 @@
                     <h3 class="card-title">Detail Magang</h3>
                 </div>
                 <div class="card-body">
+                    <p><b>Periode Magang :</b> {{ $data['internship']->start_date ?? 'Belum Mengajukan' }} s/d
+                        {{ $data['internship']->end_date ?? 'Belum Mengajukan' }}</p>
                     <p><b>Divisi Tujuan :</b> {{ $data['internship']->division->name ?? 'Belum Mengajukan' }}</p>
                     <p><b>Mentor :</b> {{ $data['internship']->mentor->user->name ?? 'Belum Ditentukan' }}</p>
                     <p><b>Nomor Pegawai :</b> {{ $data['internship']->mentor->employee_number ?? 'Belum Ditentukan' }}</p>

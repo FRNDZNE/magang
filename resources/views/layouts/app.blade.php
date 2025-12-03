@@ -163,6 +163,15 @@
             });
         </script>
     @endif
+    @if (Session::has('no_access'))
+        <script>
+            Swal.fire({
+                title: "Akses Ditolak",
+                text: "{{ Session::get('no_access') }}",
+                icon: "error"
+            });
+        </script>
+    @endif
     @stack('scripts')
 </body>
 <!--end::Body-->

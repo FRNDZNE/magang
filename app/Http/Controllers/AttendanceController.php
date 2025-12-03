@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use App\Models\Intern;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -13,48 +14,32 @@ class AttendanceController extends Controller
      */
     public function index(Intern $intern)
     {
-        return view('attendance.index',compact('intern'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
+        $data['mulai'] = $intern->start_date;
+        $data['selesai'] = $intern->end_date;
+        $data['attendance'] = Attendance::where('intern_id',$intern->id)->get();
+        $data['today'] = Carbon::parse(today())->format('Y-m-d');
+        $data['periode'] = $this->periodIntern($data['mulai'], $data['selesai']);
+        return view('attendance.index',compact('intern','data'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Intern $intern)
     {
         
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Attendance $attendance)
+    public function periodIntern($start, $end)
     {
-    }
+        $dates = [];
+        $mulai = Carbon::parse($start);
+        $selesai = Carbon::parse($end);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Attendance $attendance)
-    {
-    }
+        for ($date = $mulai; $date->lte($selesai); $date->addDay()) {
+            $dates[] = $date->format('Y-m-d');
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Attendance $attendance)
-    {
-        
-    }
-
-    public function periodIntern()
-    {
-
+        return $dates;
     }
 }
