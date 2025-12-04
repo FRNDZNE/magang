@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LogbookRequest extends FormRequest
+class FeedbackRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,18 +22,15 @@ class LogbookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date' => 'required',
-            'activity' => 'required',
-            'output' => 'required',
+            'feedback' => 'required',
         ];
     }
 
     public function attributes() : array
     {
         return [
-            'date' => 'Tanggal',
-            'activity' => 'Aktivitas',
-            'output' => 'Hasil',
+            'feedback' => 'Ulasan Balik',
+
         ];
     }
 
