@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Attendance;
-use App\Models\Intern;
 use Carbon\Carbon;
+use App\Models\Intern;
+use App\Models\Attendance;
 use Illuminate\Http\Request;
+use App\Http\Requests\AttendanceRequest;
 
 class AttendanceController extends Controller
 {
@@ -25,9 +26,26 @@ class AttendanceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Intern $intern)
+    public function store(AttendanceRequest $request, Intern $intern)
     {
-        
+        try {
+            $data = $request->validated();
+            Attendance::updateOrCreate(
+                [
+                    'id' => $data['id'],
+                    'date' => $data['date'],
+                ],
+                [
+                    'intern_id' => $intern->id,
+                    'date' => $data['date'],
+                    'status' => $data['status'],
+                    'notes' => $data['notes'],
+                ]
+        );
+            return redirect()->back()->with('success', 'Berhasil Menambahkan Absensi');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 
     public function periodIntern($start, $end)
@@ -41,5 +59,18 @@ class AttendanceController extends Controller
         }
 
         return $dates;
+    }
+
+    public function validationMentor(Request $request, Intern $intern)
+    {
+        try {
+            $data = Attendance::where('id', $request->id);
+            $data->update([
+                'validated' => $request->validated,
+            ]);
+            return redirect()->back()->with('success', 'Berhasil Mengubah Validasi');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 }

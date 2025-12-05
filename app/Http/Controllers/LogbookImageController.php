@@ -13,7 +13,7 @@ class LogbookImageController extends Controller
     public function index()
     {
         $data = LogbookImage::orderby('created_at', 'desc')->paginate(5);
-        return view('logbook_image.index', compact('data'));
+        return view('logbook-image.index', compact('data'));
     }
 
     /**

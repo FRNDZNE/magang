@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function(){
     Route::resource('students', StudentController::class);
     Route::resource('divisions', DivisionController::class);
     Route::resource('mentors', MentorController::class);
+    Route::resource('scores', ScoreController::class);
 
     Route::get('interns/history',[InternController::class,'history'])->name('interns.history');
     Route::get('interns/accepted',[InternController::class,'accepted'])->name('interns.accepted');
@@ -54,11 +55,11 @@ Route::middleware('auth')->group(function(){
     Route::put('interns/{intern}/accept', [InternController::class, 'accept'])->name('interns.accept');
     Route::delete('interns/{intern}/denied', [InternController::class, 'denied'])->name('interns.denied');
     Route::resource('interns', InternController::class);
-    Route::resource('interns.attendance', AttendanceController::class)->except(['create','edit','show','destroy']);
+    Route::put('interns/{intern}/attendance/validate',[AttendanceController::class,'validationMentor'])->name('interns.attendance.validation');
+    Route::resource('interns.attendance', AttendanceController::class)->only(['index','store']);
     Route::resource('interns.score-values', ScoreValueController::class)->only(['index','store']);
     Route::resource('interns.logbooks', LogbookController::class);
-    Route::resource('interns.logbooks.images',LogbookImageController::class);
-    Route::resource('scores', ScoreController::class);
+    Route::resource('interns.logbooks.images',LogbookImageController::class)->only(['index','store']);
     
     Route::resource('roles',RoleController::class)->only([
         'index', 'store','update','destroy'

@@ -7,7 +7,8 @@
 @endsection
 @section('content')
     <a href="{{ route('interns.logbooks.index', $intern->uuid) }}" class="btn btn-md btn-secondary">Kembali</a>
-    <a href="{{ route('interns.logbooks.index', $intern->uuid) }}" class="btn btn-md btn-dark">Masukan Gambar</a>
+    <a href="{{ route('interns.logbooks.images.index', [$intern->uuid, $logbook->id]) }}" class="btn btn-md btn-dark">Masukan
+        Gambar</a>
     <hr>
     <div class="card m-3">
         <div class="card-header">

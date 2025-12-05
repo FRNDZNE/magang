@@ -22,25 +22,28 @@ class AttendanceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "date" => "required|date",
-            "status" => "required|in:present,absent,late,excused",
-            "intern_id" => "required|exists:interns,id",
-            "validated" => "boolean",
-            "notes" => "nullable|string",
+            'id' => 'nullable',
+            'date' => 'required',
+            'status' => 'required',
+            'notes' => 'nullable',
         ];
     }
 
-    public function messages(): array
+    public function attributes() : array
     {
         return [
-            'date.required' => 'The date is required.',
-            'date.date' => 'The date is not a valid date.',
-            'status.required' => 'The status is required.',
-            'status.in' => 'The selected status is invalid.',
-            'intern_id.required' => 'The intern is required.',
-            'intern_id.exists' => 'The selected intern is invalid.',
-            'validated.boolean' => 'The validated field must be true or false.',
-            'notes.string' => 'The notes must be a string.',
+            'id' => 'ID',
+            'date' => 'Tanggal',
+            'status' => 'Status Kehadiran',
+            'notes' => 'Alasan'
+        ];
+    }
+
+
+    public function messages() : array
+    {
+        return [
+            'required' => ':attribute Tidak Boleh Kosong',
         ];
     }
 }

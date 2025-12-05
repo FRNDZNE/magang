@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Division;
 use App\Models\Mentor;
 use App\Models\Student;
