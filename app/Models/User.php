@@ -46,12 +46,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function student()
     {
-        return $this->hasOne(Student::class, 'user_id', 'id');
+        return $this->hasOne(Student::class);
     }
 
     public function mentor()
     {
-        return $this->hasOne(Mentor::class, 'user_id', 'id');
+        return $this->hasOne(Mentor::class);
     }
 
     public function getRouteKeyName()

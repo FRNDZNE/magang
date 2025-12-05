@@ -26,7 +26,7 @@ class ProcessIntern extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -48,7 +48,10 @@ class ProcessIntern extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'background' => 'bg-warning',
+            'icon' => 'bi bi-emoji-smile',
+            'heading' => 'Dalam Proses',
+            'message' => 'Pengajuan Magangmu sedang di proses',
         ];
     }
 }

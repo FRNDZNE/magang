@@ -48,7 +48,10 @@ class AcceptIntern extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'background' => 'bg-success',
+            'icon' => 'bi bi-emoji-smile',
+            'heading' => 'Diterima',
+            'message' => 'Selamat kamu diterima.',
         ];
     }
 }

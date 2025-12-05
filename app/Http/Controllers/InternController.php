@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Models\Intern;
-use App\Models\Division;
 use App\Models\Mentor;
+use App\Models\Division;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use App\Http\Requests\InternRequestForStudent;
+use App\Notifications\DeniedIntern;
 use App\Http\Requests\SelectMentorRequest;
+use Illuminate\Support\Facades\Notification;
+use App\Http\Requests\InternRequestForStudent;
 
 class InternController extends Controller
 {
@@ -75,6 +76,7 @@ class InternController extends Controller
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date'],
         ]);
+        
         return redirect()->route('interns.index')->with('success', 'Pengajuan magang berhasil dikirim.');
     }
 
@@ -114,6 +116,9 @@ class InternController extends Controller
     {
         $intern->update(['status' => 'd']);
         $intern->delete();
+        $user = $intern->student->user_id;
+        Notification::send($user, new DeniedIntern());
+
         return redirect()->route('interns.index')->with('success','Penolakan Berhasil dan Pengajuan dihapus!');
     }
     public function destroy(Intern $intern)
@@ -135,6 +140,8 @@ class InternController extends Controller
             'status' => 'a',
             'mentor_id' => $request->mentor_id, 
         ]);
+        $user = $intern->student->user;
+        $user->givePermissionTo('can-intern');
         return redirect()->route('interns.index')->with('success','Berhasil Menerima Pengajuan Magang!');
     }
 }
