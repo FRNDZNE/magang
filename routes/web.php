@@ -1,20 +1,21 @@
 <?php
 
-use App\Http\Controllers\AttendanceController;
-use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ScoreController;
+use App\Http\Controllers\InternController;
 use App\Http\Controllers\MentorController;
+use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\ScoreValueController;
-use App\Http\Controllers\InternController;
-use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\LogbookImageController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\NotificationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -47,6 +48,10 @@ Route::middleware('auth')->group(function(){
     Route::resource('divisions', DivisionController::class);
     Route::resource('mentors', MentorController::class);
     Route::resource('scores', ScoreController::class);
+
+    Route::get('/notifications',[NotificationController::class,'index'])->name("notifications.index");
+    Route::get('mark-read-all',[NotificationController::class,'markAsRead'])->name('markAll');
+    Route::get('mark-read-by-id/{id}',[NotificationController::class,'markAsReadById'])->name('markId');
 
     Route::get('interns/history',[InternController::class,'history'])->name('interns.history');
     Route::get('interns/accepted',[InternController::class,'accepted'])->name('interns.accepted');
