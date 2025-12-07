@@ -64,7 +64,7 @@ Route::middleware('auth')->group(function(){
     Route::resource('interns.attendance', AttendanceController::class)->only(['index','store']);
     Route::resource('interns.score-values', ScoreValueController::class)->only(['index','store']);
     Route::resource('interns.logbooks', LogbookController::class);
-    Route::resource('interns.logbooks.images',LogbookImageController::class)->only(['index','store']);
+    Route::resource('interns.logbooks.images',LogbookImageController::class)->only(['index','store','update','destroy']);
     
     Route::resource('roles',RoleController::class)->only([
         'index', 'store','update','destroy'

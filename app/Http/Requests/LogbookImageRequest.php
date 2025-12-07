@@ -11,7 +11,7 @@ class LogbookImageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,25 @@ class LogbookImageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'image' => 'required|file|image|mimes:jpeg,png,jpg,webp,gif,svg|max:5120',
+        ];
+    }
+
+    public function attributes() : array
+    {
+        return [
+            'image' => 'File Gambar',
+        ];
+    }
+
+
+    public function messages() : array
+    {
+        return [
+            'required' => ':attribute tidak boleh kosong',
+            'image'    => ':attribute harus berupa gambar',
+            'mimes'    => ':attribute harus berformat jpeg, png, jpg, webp, gif, atau svg',
+            'max'      => ':attribute maksimal berukuran 5 MB',
         ];
     }
 }

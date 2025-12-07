@@ -24,7 +24,19 @@
             <h3 class="card-title">Dokumentasi</h3>
         </div>
         <div class="card-body">
-
+            @forelse ($images as $img)
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <img src="{{ asset($img->image_path) }}" alt="">
+                    </div>
+                </div>
+            @empty
+                <div class="row-justify-content-center">
+                    <div class="col-md-12">
+                        <p>Tidak Ada Dokumentasi</p>
+                    </div>
+                </div>
+            @endforelse
         </div>
     </div>
 
